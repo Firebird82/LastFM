@@ -6,6 +6,7 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Android.OS;
+using Android.Text;
 
 
 namespace LastFM
@@ -60,7 +61,11 @@ namespace LastFM
 		public void GetMyArtist (string selectedArtist)
 		{
 			EditText searchQuery = FindViewById<EditText> (Resource.Id.searchtext);
-			var artist = RestSharpFunctions.GetArtist (selectedArtist);
+
+			var artist = RestSharpFunctions.GetArtist(searchQuery.Text);
+			TextView artistBio = FindViewById<TextView> (Resource.Id.twArtistBio);
+			artistBio.TextFormatted = Html.FromHtml(artist.Bio.Summary);
+
 		}
 
 
