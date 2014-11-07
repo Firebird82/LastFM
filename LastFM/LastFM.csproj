@@ -54,6 +54,8 @@
     <Compile Include="Classes\LastfmClasses.cs" />
     <Compile Include="ArtistViewActivity.cs" />
     <Compile Include="Classes\GhostObjects.cs" />
+    <Compile Include="SearchActivity.cs" />
+    <Compile Include="Classes\ArtistSceenAdapter.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -65,6 +67,7 @@
     <AndroidResource Include="Resources\values\Strings.xml" />
     <AndroidResource Include="Resources\drawable\Icon.png" />
     <AndroidResource Include="Resources\layout\ArtistView.axml" />
+    <AndroidResource Include="Resources\layout\ListViewTemp.axml" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
   <ItemGroup>

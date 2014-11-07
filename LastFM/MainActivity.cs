@@ -13,6 +13,7 @@ namespace LastFM
 	public class MainActivity : Activity
 	{
 		RestSharp RestSharpFunctions = new RestSharp ();
+		GhostObjects ghost = new GhostObjects ();
 
 		protected override void OnCreate (Bundle bundle)
 		{
@@ -20,11 +21,10 @@ namespace LastFM
 
 			// Set our view from the "main" layout resource
 			SetContentView (Resource.Layout.Main);
-
-			// Get our button from the layout resource,
-			// and attach an event to it
+		
 			Button toArtist = FindViewById<Button> (Resource.Id.btnToArtist);
 			Button searchButton = FindViewById<Button> (Resource.Id.btnSearch);
+			EditText searchQuery = FindViewById<EditText> (Resource.Id.searchtext);
 
 			toArtist.Click += delegate {
 				var intent = new Intent (this, typeof(ArtistViewActivity));
@@ -33,19 +33,33 @@ namespace LastFM
 			};
 
 			searchButton.Click += delegate {
-				GetMyArtist();
+				SearchResult (searchQuery.Text);
 			};
 		}
 
-		public void GetMyArtist ()
+		public void SearchResult (string query)
+		{
+			RestSharp restSharp = new RestSharp();
+
+			var data =  restSharp.GetSearchResult(query);
+			var items = new string[] { "Vegetables", "Fruits", "Flower Buds", "Legumes", "Bulbs", "Tubers" };
+			EditText searchQuery = FindViewById<EditText> (Resource.Id.searchtext);
+			ListView lView = FindViewById<ListView> (Resource.Id.listView1);
+			lView.Adapter = new ArtistSceenAdapter (this, data);
+		}
+
+		public void GetMyArtist (string selectedArtist)
 		{
 			EditText searchQuery = FindViewById<EditText> (Resource.Id.searchtext);
+
 			var artist = RestSharpFunctions.GetArtist(searchQuery.Text);
-			TextView artistBio = FindViewById<TextView> (Resource.Id.twArtistBio);
-			artistBio.TextFormatted = Html.FromHtml(artist.Bio.Summary);
+		//TextView artistBio = FindViewById<TextView> (Resource.Id.twArtistBio);
+		//artistBio.TextFormatted = Html.FromHtml(artist.Bio.Summary);
+
 		}
 	}
 }
+
 
 
 
