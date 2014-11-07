@@ -37,7 +37,6 @@ namespace LastFM
 			return response.Data;
 		}
 
-
 		public Artist GetArtist(string arg) {
 
 			string url = address + medthodGetArtistInfo + arg + "&api_key=" + apiKey;
@@ -46,12 +45,7 @@ namespace LastFM
 			request.RootElement = "artist";
 
 			return Execute<Artist>(request, url);
-
 		}
-
-	
-
-
 	}
 }
 

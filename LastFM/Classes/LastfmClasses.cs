@@ -26,10 +26,7 @@ namespace LastFM
 		public string Url { get; set; }
 		public Biography Bio { get; set; }
 		public ArtistImageCollection Image { get; set; }
-
 	}
-
-
 
 	public class Results  
 	{
@@ -37,10 +34,5 @@ namespace LastFM
 	}
 
 	public class ArtistCollection : List<Artist>{}
-
-
-
-
-
 }
 
