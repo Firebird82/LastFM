@@ -14,6 +14,7 @@ namespace LastFM
 	public class MainActivity : Activity
 	{
 		RestSharp RestSharpFunctions = new RestSharp ();
+		GhostObjects ghost = new GhostObjects ();
 
 		protected override void OnCreate (Bundle bundle)
 		{
@@ -21,11 +22,14 @@ namespace LastFM
 
 			// Set our view from the "main" layout resource
 			SetContentView (Resource.Layout.Main);
-
-			// Get our button from the layout resource,
-			// and attach an event to it
+		
 			Button toArtist = FindViewById<Button> (Resource.Id.btnToArtist);
 			Button searchButton = FindViewById<Button> (Resource.Id.btnSearch);
+			EditText searchQuery = FindViewById<EditText> (Resource.Id.searchtext);
+
+
+			string query = Intent.GetStringExtra ("searchquery") ?? "Data not available";
+
 
 
 			toArtist.Click += delegate {
@@ -35,25 +39,36 @@ namespace LastFM
 			};
 
 			searchButton.Click += delegate {
+				SearchResult (query);
 
-				GetMyArtist ();
 			};
 
 
-
 		}
 
-		public void GetMyArtist ()
+		public void SearchResult (string query)
 		{
-
+			var data = ghost.Artistmatches;
+			var items = new string[] { "Vegetables", "Fruits", "Flower Buds", "Legumes", "Bulbs", "Tubers" };
 			EditText searchQuery = FindViewById<EditText> (Resource.Id.searchtext);
-			var artist = RestSharpFunctions.GetArtist (searchQuery.Text);
-			TextView artistBio = FindViewById<TextView> (Resource.Id.twArtistBio);
-			artistBio.Text = artist.Bio.Summary;
+			ListView lView = FindViewById<ListView> (Resource.Id.listView1);
+			lView.Adapter = new ArtistSceenAdapter (this, data);
+
+		
 		}
+
+		public void GetMyArtist (string selectedArtist)
+		{
+			EditText searchQuery = FindViewById<EditText> (Resource.Id.searchtext);
+			var artist = RestSharpFunctions.GetArtist (selectedArtist);
+		}
+
 
 	}
+
+	
 }
+
 
 
 

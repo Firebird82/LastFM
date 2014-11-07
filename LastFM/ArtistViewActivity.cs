@@ -14,7 +14,7 @@ namespace LastFM
 	[Activity (Label = "ArtistViewActivity")]			
 	public class ArtistViewActivity : Activity
 	{
-		RestSharp RestSharpFunctions = new RestSharp();
+		RestSharp RestSharpFunctions = new RestSharp ();
 
 		protected override void OnCreate (Bundle bundle)
 		{
@@ -24,7 +24,7 @@ namespace LastFM
 			GetArtist ();
 		}
 
-		public void GetArtist()
+		public void GetArtist ()
 		{
 
 			string query = Intent.GetStringExtra ("artist") ?? "Data not available";
