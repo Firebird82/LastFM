@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Xml.Serialization;
 
 namespace LastFM
 {
-	public class image
+	public class Image
 	{
 		public string Size { get; set; }
 		public string Value { get; set; }
@@ -17,7 +18,7 @@ namespace LastFM
 		public DateTime Published { get; set; }
 	}
 
-	public class ArtistImageCollection : List<image> { }
+	public class ArtistImageCollection : List<Image> { }
 
 	public class Artist
 	{
@@ -26,21 +27,22 @@ namespace LastFM
 		public string Url { get; set; }
 		public Biography Bio { get; set; }
 		public ArtistImageCollection Image { get; set; }
-
 	}
-
-
-
-	public class Results   
-	{
-		public ArtistCollection Artistmatches{ get; set; }
-	}
-
-	public class ArtistCollection : List<Artist>{}
-
-
-
-
-
+//
+//	public class ArtistCollection : List<Artist>{}
+//
+//	public class Artistmatches
+//	{
+//		[XmlElement("artistmatches")]
+//		public ArtistCollection artist { get; set; }
+//	}
+//
+//	public class ArtistMatchesCollection : List<Artistmatches>{}
+//
+//	public class Results
+//	{
+//		[XmlElement("artistmatches")]
+//		public ArtistMatchesCollection artistmatches { get; set; }
+//	}
 }
 

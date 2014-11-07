@@ -10,25 +10,17 @@ namespace LastFM
 	{
 		public GhostObjects ()
 		{
-	
 		}
 
 		public List<GhostArtist> Artistmatches{ get; set; }
 
-
-		public List<GhostArtist> FillList ()
+		public List<GhostArtist> FillList()
 		{
-			Artistmatches.Add (new GhostArtist{ Name = "Cher" });
-			Artistmatches.Add (new GhostArtist{ Name = "Eagle-Eye Cherry" });
-
-
-
+			RestSharp restSharp = new RestSharp();
+			Artistmatches = restSharp.GetSearchResult("Abba");
 
 			return Artistmatches;
-
 		}
-
-
 	}
 
 	public class GhostArtist
@@ -39,8 +31,6 @@ namespace LastFM
 		{
 
 		}
-
-
 	}
 }
 

@@ -1,5 +1,4 @@
 ﻿using System;
-
 using Android.App;
 using Android.Content;
 using Android.Runtime;
@@ -7,7 +6,6 @@ using Android.Views;
 using Android.Widget;
 using Android.OS;
 using Android.Text;
-
 
 namespace LastFM
 {
@@ -28,7 +26,6 @@ namespace LastFM
 			Button toArtist = FindViewById<Button> (Resource.Id.btnToArtist);
 			Button searchButton = FindViewById<Button> (Resource.Id.btnSearch);
 
-
 			toArtist.Click += delegate {
 				var intent = new Intent (this, typeof(ArtistViewActivity));
 				intent.PutExtra ("artist", "Backstreet Boys");
@@ -36,23 +33,17 @@ namespace LastFM
 			};
 
 			searchButton.Click += delegate {
-
-				GetMyArtist ();
+				GetMyArtist();
 			};
-
-
-
 		}
 
 		public void GetMyArtist ()
 		{
-
 			EditText searchQuery = FindViewById<EditText> (Resource.Id.searchtext);
 			var artist = RestSharpFunctions.GetArtist(searchQuery.Text);
 			TextView artistBio = FindViewById<TextView> (Resource.Id.twArtistBio);
 			artistBio.TextFormatted = Html.FromHtml(artist.Bio.Summary);
 		}
-
 	}
 }
 
