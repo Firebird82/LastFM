@@ -26,13 +26,21 @@ namespace LastFM
 		public string Url { get; set; }
 		public Biography Bio { get; set; }
 		public ArtistImageCollection Image { get; set; }
+
 	}
 
-	public class Results  
+
+
+	public class Results   
 	{
 		public ArtistCollection Artistmatches{ get; set; }
 	}
 
 	public class ArtistCollection : List<Artist>{}
+
+
+
+
+
 }
 

@@ -53,6 +53,7 @@
     <Compile Include="Classes\RestSharp.cs" />
     <Compile Include="Classes\LastfmClasses.cs" />
     <Compile Include="ArtistViewActivity.cs" />
+    <Compile Include="Classes\GhostObjects.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
