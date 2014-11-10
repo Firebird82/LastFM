@@ -53,7 +53,6 @@ namespace LastFM
 
 		public void OnListItemClick(object sender, AdapterView.ItemClickEventArgs e)
 		{
-
 			var clickedArtist = artist.Similar[e.Position];
 			var intent = new Intent (this, typeof(ArtistViewActivity));
 			intent.PutExtra ("artist", clickedArtist.Name);
