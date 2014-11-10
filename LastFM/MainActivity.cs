@@ -16,7 +16,8 @@ namespace LastFM
 	{
 		RestSharp RestSharpFunctions = new RestSharp ();
 		GhostObjects ghost = new GhostObjects ();
-		List<Artist> data = new List<Artist> ();
+		List<Artist> artistList = new List<Artist> ();
+
 		protected override void OnCreate (Bundle bundle)
 		{
 			base.OnCreate (bundle);
@@ -39,16 +40,15 @@ namespace LastFM
 
 		public void SearchResult (string searchQuery)
 		{
-			var v =  RestSharpFunctions.GetArtistList(searchQuery);
-			data = v;
+			artistList =  RestSharpFunctions.GetArtistList(searchQuery);
 			ListView lView = FindViewById<ListView> (Resource.Id.listView1);
-			lView.Adapter = new ArtistSceenAdapter (this, data);
+			lView.Adapter = new ArtistSceenAdapter (this, artistList);
 			lView.ItemClick += OnListItemClick;
 		}
 
 		public void OnListItemClick(object sender, AdapterView.ItemClickEventArgs e)
 		{
-			var clickedArtist = data[e.Position];
+			var clickedArtist = artistList[e.Position];
 			var intent = new Intent (this, typeof(ArtistViewActivity));
 			intent.PutExtra ("artist", clickedArtist.Name);
 			StartActivity (intent);

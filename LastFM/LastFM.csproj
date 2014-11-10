@@ -56,6 +56,7 @@
     <Compile Include="Classes\GhostObjects.cs" />
     <Compile Include="SearchActivity.cs" />
     <Compile Include="Classes\ArtistSceenAdapter.cs" />
+    <Compile Include="Classes\SimilarScreenAdapter.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />

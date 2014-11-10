@@ -19,7 +19,7 @@ namespace LastFM
 	}
 
 	public class ArtistImageCollection : List<Image> { }
-	public class SimilarCollection : List<Similar> { }
+	public class ArtistSimilarCollection : List<Artist> { }
 
 	public class Artist
 	{
@@ -28,7 +28,7 @@ namespace LastFM
 		public string Url { get; set; }
 		public Biography Bio { get; set; }
 		public ArtistImageCollection Image { get; set; }
-		public SimilarCollection Similar { get; set; }
+		public ArtistSimilarCollection Similar { get; set; }
 	}
 
 	public class Similar
