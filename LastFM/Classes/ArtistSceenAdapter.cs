@@ -34,12 +34,16 @@ namespace LastFM
 		{
 			var item = items[position];
 			View view = convertView;
+			var artistImages = item.Image;
+			var coverphoto = BitmapLoader.GetImageFromUrl(artistImages.First (i => i.Size.Equals ("medium")).Value);
+
 
 			if (view == null) {
 				view = context.LayoutInflater.Inflate (Resource.Layout.ListViewTemp, null);
 			}
 
-			view.FindViewById<TextView> (Resource.Id.textview2).Text = string.Format ("{0}", item.Name);
+			view.FindViewById<TextView> (Resource.Id.lvListArtistName).Text = string.Format ("{0}", item.Name);
+			var imageView = view.FindViewById<ImageView> (Resource.Id.ivArtistImage);
 
 			return view;
 		}

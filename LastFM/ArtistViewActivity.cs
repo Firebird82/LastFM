@@ -17,7 +17,6 @@ namespace LastFM
 	public class ArtistViewActivity : Activity
 	{
 		RestSharp RestSharpFunctions = new RestSharp();
-
 		protected override void OnCreate (Bundle bundle)
 		{
 			base.OnCreate (bundle);
@@ -44,8 +43,7 @@ namespace LastFM
 			artistFormed.Text = artist.Bio.YearFormed.ToString();
 			artistPublished.Text = artist.Bio.Published.ToString();
 
-			//artistBio.TextFormatted = Html.FromHtml(artist.Bio.Summary);
-			//var image = ?????;
+
 		}
 	}
 }
