@@ -6,6 +6,7 @@ using Android.Views;
 using Android.Widget;
 using Android.OS;
 using Android.Text;
+using Android;
 using System.Collections.Generic;
 
 namespace LastFM
@@ -38,10 +39,9 @@ namespace LastFM
 			};
 		}
 
-		public void SearchResult (string query)
+		public void SearchResult (string searchQuery)
 		{
-			data =  RestSharpFunctions.GetSearchResult(query);
-			EditText searchQuery = FindViewById<EditText> (Resource.Id.searchtext);	
+			data =  RestSharpFunctions.GetSearchResult(searchQuery);
 			ListView lView = FindViewById<ListView> (Resource.Id.listView1);
 			lView.Adapter = new ArtistSceenAdapter (this, data);
 			lView.ItemClick += OnListItemClick;
