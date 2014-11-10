@@ -12,12 +12,12 @@ using Android.Widget;
 
 namespace LastFM
 {
-	public class ArtistSceenAdapter:BaseAdapter<Artist>{
+	public class SimilarScreenAdapter:BaseAdapter<Artist>{
 		List<Artist> items;
 		Activity context;
 
-		public ArtistSceenAdapter(Activity context, List<Artist> items):base(){
-		
+		public SimilarScreenAdapter(Activity context, List<Artist> items):base(){
+
 			this.context = context;
 			this.items = items;
 		}
@@ -34,15 +34,12 @@ namespace LastFM
 		{
 			var item = items[position];
 			View view = convertView;
-			var artistImages = item.Image;
-
 
 			if (view == null) {
-				view = context.LayoutInflater.Inflate (Resource.Layout.ListViewTemp, null);
+				view = context.LayoutInflater.Inflate (Resource.Layout.similarListTemplate, null);
 			}
 
-			view.FindViewById<TextView> (Resource.Id.lvListArtistName).Text = string.Format ("{0}", item.Name);
-			var imageView = view.FindViewById<ImageView> (Resource.Id.ivArtistImage);
+			view.FindViewById<TextView> (Resource.Id.SimilarName).Text = string.Format ("{0}", item.Name);
 
 			return view;
 		}

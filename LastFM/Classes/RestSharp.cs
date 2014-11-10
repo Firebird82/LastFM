@@ -31,7 +31,6 @@ namespace LastFM
 			var request = GetRequest (method, artistName);
 			var response = client.Execute<T>(request);
 			return response.Data;
-
 		}
 
 		 RestRequest GetRequest (string methodValue, string searchString)
@@ -48,7 +47,9 @@ namespace LastFM
 		public Artist GetArtist(string query)
 		{
 			string method = "artist.getinfo";
-			return Execute<Artist> (query, method);
+			var artist = Execute<Artist> (query, method);
+			artist.Similar.RemoveAt(0);
+			return artist;
 		}
 
 		public ArtistsCollection GetArtistList(string query)
@@ -56,9 +57,6 @@ namespace LastFM
 			string method = "artist.search";
 			return Execute<ArtistsCollection> (query, method);
 		}
-
-
-
 	}
 }
 

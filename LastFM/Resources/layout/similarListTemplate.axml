@@ -5,13 +5,13 @@
     android:rowCount="1"
     android:columnCount="2">
     <TextView
-        android:text="Cell 0"
+        android:text=""
         android:textSize="14dip"
         android:layout_column="0"
-        android:id="@+id/textview" />
+        android:id="@+id/SimilarImage" />
     <TextView
-        android:text="Cell 1"
+        android:text=""
         android:textSize="14dip"
         android:layout_column="1"
-        android:id="@+id/textview2" />
+        android:id="@+id/SimilarName" />
 </GridLayout>

@@ -63,6 +63,12 @@ namespace LastFM
 		public partial class Id
 		{
 			
+			// aapt resource value: 0x7f06000e
+			public const int SimilarImage = 2131099662;
+			
+			// aapt resource value: 0x7f06000f
+			public const int SimilarName = 2131099663;
+			
 			// aapt resource value: 0x7f06000b
 			public const int btnSearch = 2131099659;
 			
@@ -92,12 +98,6 @@ namespace LastFM
 			
 			// aapt resource value: 0x7f060005
 			public const int textView5 = 2131099653;
-			
-			// aapt resource value: 0x7f06000e
-			public const int textview = 2131099662;
-			
-			// aapt resource value: 0x7f06000f
-			public const int textview2 = 2131099663;
 			
 			// aapt resource value: 0x7f060001
 			public const int twArtistBio = 2131099649;

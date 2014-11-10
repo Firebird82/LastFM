@@ -17,6 +17,9 @@ namespace LastFM
 	public class ArtistViewActivity : Activity
 	{
 		RestSharp RestSharpFunctions = new RestSharp();
+		Artist artist = new Artist();
+
+
 		protected override void OnCreate (Bundle bundle)
 		{
 			base.OnCreate (bundle);
@@ -36,14 +39,25 @@ namespace LastFM
 
 			string query = Intent.GetStringExtra ("artist") ?? "Data not available";
 
-			var artist = RestSharpFunctions.GetArtist (query);
+			artist = RestSharpFunctions.GetArtist (query);
 			artistName.Text = artist.Name;
 			artistBio.TextFormatted = Html.FromHtml(artist.Bio.Summary);
 			artistBio.MovementMethod = LinkMovementMethod.Instance;
 			artistFormed.Text = artist.Bio.YearFormed.ToString();
 			artistPublished.Text = artist.Bio.Published.ToString();
 
+			ListView listView = FindViewById<ListView> (Resource.Id.similarList);
+			listView.Adapter = new SimilarScreenAdapter(this, artist.Similar);
+			listView.ItemClick += OnListItemClick;
+		}
 
+		public void OnListItemClick(object sender, AdapterView.ItemClickEventArgs e)
+		{
+
+			var clickedArtist = artist.Similar[e.Position];
+			var intent = new Intent (this, typeof(ArtistViewActivity));
+			intent.PutExtra ("artist", clickedArtist.Name);
+			StartActivity (intent);
 		}
 	}
 }
