@@ -6,6 +6,8 @@ using Android.Views;
 using Android.Widget;
 using Android.OS;
 using Android.Text;
+using Android 
+using System.Collections.Generic;
 
 namespace LastFM
 {
@@ -14,7 +16,7 @@ namespace LastFM
 	{
 		RestSharp RestSharpFunctions = new RestSharp ();
 		GhostObjects ghost = new GhostObjects ();
-
+		List<GhostArtist> data = new List<GhostArtist> ();
 		protected override void OnCreate (Bundle bundle)
 		{
 			base.OnCreate (bundle);
@@ -41,21 +43,32 @@ namespace LastFM
 		{
 			RestSharp restSharp = new RestSharp();
 
-			var data =  restSharp.GetSearchResult(query);
+			data =  restSharp.GetSearchResult(query);
 			var items = new string[] { "Vegetables", "Fruits", "Flower Buds", "Legumes", "Bulbs", "Tubers" };
 			EditText searchQuery = FindViewById<EditText> (Resource.Id.searchtext);
 			ListView lView = FindViewById<ListView> (Resource.Id.listView1);
 			lView.Adapter = new ArtistSceenAdapter (this, data);
+			lView.ItemClick += OnListItemClick;
 		}
 
-		public void GetMyArtist (string selectedArtist)
+		public void OnListItemClick(object sender, AdapterView.ItemClickEventArgs e)
 		{
-			EditText searchQuery = FindViewById<EditText> (Resource.Id.searchtext);
+			var listView = sender as ListView;
+			var t = data[e.Position];
 
-			var artist = RestSharpFunctions.GetArtist(searchQuery.Text);
+			var balle = t.Name;
 
+			var intent = new Intent (this, typeof(ArtistViewActivity));
+			intent.PutExtra ("artist", t.Name);
+			StartActivity (intent);
+		
 
+		
 		}
+
+
+
+
 	}
 }
 

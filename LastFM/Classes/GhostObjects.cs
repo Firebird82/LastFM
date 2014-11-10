@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Dynamic;
 using System.Linq;
+using System.Drawing;	
 using System.Text;
 
 namespace LastFM
@@ -50,6 +51,7 @@ namespace LastFM
 	public class GhostArtist
 	{
 		public string Name{ get; set; }
+		public Image Image { get; set; }
 
 		public GhostArtist ()
 		{

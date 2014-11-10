@@ -4,7 +4,9 @@ using System.Dynamic;
 using System.Linq;
 using System.Text;
 using RestSharp;
+using System.Drawing;
 using System.Text.RegularExpressions;
+using System.Net;
 
 namespace LastFM
 {
@@ -71,6 +73,9 @@ namespace LastFM
 
 				GhostArtist newArtist = new GhostArtist();
 				newArtist.Name = artistName;
+
+
+
 				artistList.Add(newArtist);
 			}
 
