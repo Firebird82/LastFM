@@ -25,13 +25,8 @@ namespace LastFM
 			// Set our view from the "main" layout resource
 			SetContentView (Resource.Layout.Main);
 		
-			Button toArtist = FindViewById<Button> (Resource.Id.btnToArtist);
 			Button searchButton = FindViewById<Button> (Resource.Id.btnSearch);
 			EditText searchQuery = FindViewById<EditText> (Resource.Id.searchtext);
-
-			toArtist.Click += delegate {
-				RestSharpFunctions.GetArtist("cher");
-			};
 
 			searchButton.Click += delegate {
 				SearchResult (searchQuery.Text);
@@ -42,7 +37,7 @@ namespace LastFM
 		{
 
 			artistList =  RestSharpFunctions.GetArtistList(searchQuery);
-			ListView lView = FindViewById<ListView> (Resource.Id.lvListArtistName);
+			ListView lView = FindViewById<ListView> (Resource.Id.lvSearchResult);
 			lView.Adapter = new ArtistSceenAdapter (this, artistList);
 			lView.ItemClick += OnListItemClick;
 		}
