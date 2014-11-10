@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Xml.Serialization;
+//using System.Xml.Serialization;
 
 namespace LastFM
 {
@@ -19,6 +19,7 @@ namespace LastFM
 	}
 
 	public class ArtistImageCollection : List<Image> { }
+	public class SimilarCollection : List<Similar> { }
 
 	public class Artist
 	{
@@ -27,6 +28,13 @@ namespace LastFM
 		public string Url { get; set; }
 		public Biography Bio { get; set; }
 		public ArtistImageCollection Image { get; set; }
+		public SimilarCollection Similar { get; set; }
+	}
+
+	public class Similar
+	{
+		public string Name { get; set; }
+		public string Url { get; set; }
 	}
 //
 //	public class ArtistCollection : List<Artist>{}

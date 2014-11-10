@@ -9,6 +9,7 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Android.Text;
+using Android.Text.Method;
 
 namespace LastFM
 {
@@ -39,6 +40,7 @@ namespace LastFM
 			var artist = RestSharpFunctions.GetArtist (query);
 			artistName.Text = artist.Name;
 			artistBio.TextFormatted = Html.FromHtml(artist.Bio.Summary);
+			artistBio.MovementMethod = LinkMovementMethod.Instance;
 			artistFormed.Text = artist.Bio.YearFormed.ToString();
 			artistPublished.Text = artist.Bio.Published.ToString();
 
