@@ -23,8 +23,6 @@ namespace LastFM
 
 		}
 
-	
-
 		public T Execute<T> (string artistName,string method) where T : new()
 		{
 			var client = new RestClient();
@@ -34,12 +32,10 @@ namespace LastFM
 			var response = client.Execute<T>(request);
 			var v = response.Data;
 			return v;
-
 		}
 
 		 RestRequest GetRequest (string methodValue, string searchString)
 		{
-
 			var parameterKey = (methodValue.Split ('.')) [0];
 			var request = new RestRequest("/2.0/", Method.GET);
 			request.AddParameter("method", methodValue); // album.search
@@ -49,27 +45,17 @@ namespace LastFM
 			return request;
 		}
 
-
-		public Artist GetArtist(string query){
-		
+		public Artist GetArtist(string query)
+		{
 			string method = "artist.getinfo";
 			return Execute<Artist> (query, method);
-		
-		
 		}
 
-
-		public Artistmatches GetArtistList(string query){
-
-
+		public Artistmatches GetArtistList(string query)
+		{
 			string method = "artist.search";
 			return Execute<Artistmatches> (query, method);
-
-		
-		
 		}
-
-
 	}
 }
 

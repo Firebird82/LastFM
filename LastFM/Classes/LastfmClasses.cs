@@ -43,7 +43,5 @@ namespace LastFM
 	{
 		public ArtistsCollection artistsCollection { get; set; }
 	}
-
-
 }
 
