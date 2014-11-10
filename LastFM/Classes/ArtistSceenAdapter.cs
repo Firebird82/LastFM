@@ -12,17 +12,17 @@ using Android.Widget;
 
 namespace LastFM
 {
-	public class ArtistSceenAdapter:BaseAdapter<GhostArtist>{
-		List<GhostArtist> items;
+	public class ArtistSceenAdapter:BaseAdapter<Artist>{
+		List<Artist> items;
 		Activity context;
 
-		public ArtistSceenAdapter(Activity context, List<GhostArtist> items):base(){
+		public ArtistSceenAdapter(Activity context, List<Artist> items):base(){
 		
 			this.context = context;
 			this.items = items;
 		}
 
-		public override GhostArtist this [int position] {
+		public override Artist this [int position] {
 			get{ return items [position]; }
 		}
 
