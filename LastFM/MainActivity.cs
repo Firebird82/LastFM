@@ -39,9 +39,8 @@ namespace LastFM
 
 		public void SearchResult (string searchQuery)
 		{
-			var v =  RestSharpFunctions.GetArtistList(searchQuery);
-			data = v;
-			ListView lView = FindViewById<ListView> (Resource.Id.listView1);
+			data = RestSharpFunctions.GetArtistList(searchQuery);
+			ListView lView = FindViewById<ListView> (Resource.Id.lvListArtistName);
 			lView.Adapter = new ArtistSceenAdapter (this, data);
 			lView.ItemClick += OnListItemClick;
 		}
