@@ -42,7 +42,7 @@ namespace LastFM
 		{
 
 			artistList =  RestSharpFunctions.GetArtistList(searchQuery);
-			ListView lView = FindViewById<ListView> (Resource.Id.lvListArtistName);
+			ListView lView = FindViewById<ListView> (Resource.Id.lvSearchResult);
 			lView.Adapter = new ArtistSceenAdapter (this, artistList);
 			lView.ItemClick += OnListItemClick;
 		}
