@@ -30,8 +30,8 @@ namespace LastFM
 
 			var request = GetRequest (method, artistName);
 			var response = client.Execute<T>(request);
-			var v = response.Data;
-			return v;
+			return response.Data;
+
 		}
 
 		 RestRequest GetRequest (string methodValue, string searchString)
@@ -51,11 +51,14 @@ namespace LastFM
 			return Execute<Artist> (query, method);
 		}
 
-		public Artistmatches GetArtistList(string query)
+		public ArtistsCollection GetArtistList(string query)
 		{
 			string method = "artist.search";
-			return Execute<Artistmatches> (query, method);
+			return Execute<ArtistsCollection> (query, method);
 		}
+
+
+
 	}
 }
 
