@@ -63,17 +63,14 @@ namespace LastFM
 		public partial class Id
 		{
 			
+			// aapt resource value: 0x7f06000d
+			public const int SimilarImage = 2131099661;
+			
 			// aapt resource value: 0x7f06000e
-			public const int SimilarImage = 2131099662;
+			public const int SimilarName = 2131099662;
 			
-			// aapt resource value: 0x7f06000f
-			public const int SimilarName = 2131099663;
-			
-			// aapt resource value: 0x7f06000b
-			public const int btnSearch = 2131099659;
-			
-			// aapt resource value: 0x7f060009
-			public const int btnToArtist = 2131099657;
+			// aapt resource value: 0x7f06000a
+			public const int btnSearch = 2131099658;
 			
 			// aapt resource value: 0x7f060007
 			public const int ivArtistImage = 2131099655;
@@ -81,14 +78,14 @@ namespace LastFM
 			// aapt resource value: 0x7f060008
 			public const int lvListArtistName = 2131099656;
 			
-			// aapt resource value: 0x7f06000d
-			public const int lvSearchResult = 2131099661;
-			
 			// aapt resource value: 0x7f06000c
-			public const int none = 2131099660;
+			public const int lvSearchResult = 2131099660;
 			
-			// aapt resource value: 0x7f06000a
-			public const int searchtext = 2131099658;
+			// aapt resource value: 0x7f06000b
+			public const int none = 2131099659;
+			
+			// aapt resource value: 0x7f060009
+			public const int searchtext = 2131099657;
 			
 			// aapt resource value: 0x7f060006
 			public const int similarList = 2131099654;

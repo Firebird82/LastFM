@@ -2,6 +2,9 @@
 using System.Threading.Tasks;
 using Android.Graphics;
 using System.Net.Http;
+using System.Net;
+using System.IO;
+using System.Drawing;
 
 namespace LastFM
 {
@@ -24,6 +27,23 @@ namespace LastFM
 				}
 			}
 		}
+
+		public static Bitmap GetImageBitmapFromUrl(string url)
+		{
+			Bitmap imageBitmap = null;
+
+			using (var webClient = new WebClient())
+			{
+				var imageBytes = webClient.DownloadData(url);
+				if (imageBytes != null && imageBytes.Length > 0)
+				{
+					imageBitmap = BitmapFactory.DecodeByteArray(imageBytes, 0, imageBytes.Length);
+				}
+			}
+
+			return imageBitmap;
+		}
+
 	}
 }
 
