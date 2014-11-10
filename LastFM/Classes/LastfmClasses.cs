@@ -36,21 +36,14 @@ namespace LastFM
 		public string Name { get; set; }
 		public string Url { get; set; }
 	}
-//
-//	public class ArtistCollection : List<Artist>{}
-//
-//	public class Artistmatches
-//	{
-//		[XmlElement("artistmatches")]
-//		public ArtistCollection artist { get; set; }
-//	}
-//
-//	public class ArtistMatchesCollection : List<Artistmatches>{}
-//
-//	public class Results
-//	{
-//		[XmlElement("artistmatches")]
-//		public ArtistMatchesCollection artistmatches { get; set; }
-//	}
+
+	public class ArtistsCollection : List<Artist> { }
+
+	public class Artistmatches
+	{
+		public ArtistsCollection artistsCollection { get; set; }
+	}
+
+
 }
 
