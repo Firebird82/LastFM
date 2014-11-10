@@ -1,17 +1,14 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using RestSharp;
-
 using Android.App;
 using Android.Content;
 using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
-
 
 namespace LastFM
 {
@@ -23,7 +20,6 @@ namespace LastFM
 		
 			this.context = context;
 			this.items = items;
-
 		}
 
 		public override GhostArtist this [int position] {
@@ -38,30 +34,20 @@ namespace LastFM
 		{
 			var item = items[position];
 			View view = convertView;
-			if (view == null) {
-			
-				view = context.LayoutInflater.Inflate (Resource.Layout.ListViewTemp, null);
 
+			if (view == null) {
+				view = context.LayoutInflater.Inflate (Resource.Layout.ListViewTemp, null);
 			}
 
-		
 			view.FindViewById<TextView> (Resource.Id.textview2).Text = string.Format ("{0}", item.Name);
 
 			return view;
-
-
-
-
 		}
 
 		public override int Count
 		{
 			get { return items.Count; }
 		}
-
-	
 	}
-
-
 }
 

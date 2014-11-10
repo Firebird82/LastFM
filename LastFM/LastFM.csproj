@@ -68,6 +68,7 @@
     <AndroidResource Include="Resources\drawable\Icon.png" />
     <AndroidResource Include="Resources\layout\ArtistView.axml" />
     <AndroidResource Include="Resources\layout\ListViewTemp.axml" />
+    <AndroidResource Include="Resources\layout\similarListTemplate.axml" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
   <ItemGroup>

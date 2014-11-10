@@ -53,14 +53,7 @@ namespace LastFM
 			var intent = new Intent (this, typeof(ArtistViewActivity));
 			intent.PutExtra ("artist", clickedArtist.Name);
 			StartActivity (intent);
-		
-
-		
 		}
-
-
-
-
 	}
 }
 

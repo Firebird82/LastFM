@@ -20,15 +20,11 @@ namespace LastFM
 		RestSharp RestSharpFunctions = new RestSharp ();
 		GhostObjects ghost = new GhostObjects ();
 
-
 		protected override void OnCreate (Bundle bundle)
 		{
 			base.OnCreate (bundle);
 			// Create your application here
-
-
-
+		}
 	}
-}
 }
 

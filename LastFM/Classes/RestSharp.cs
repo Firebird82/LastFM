@@ -73,9 +73,6 @@ namespace LastFM
 
 				GhostArtist newArtist = new GhostArtist();
 				newArtist.Name = artistName;
-
-
-
 				artistList.Add(newArtist);
 			}
 

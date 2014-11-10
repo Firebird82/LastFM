@@ -21,7 +21,6 @@ namespace LastFM
 			RestSharp restSharp = new RestSharp();
 			Artistmatches = restSharp.GetSearchResult("Abba");
 
-
 //			Artistmatches = new List<GhostArtist> ();
 //			Artistmatches.Add (new GhostArtist{ Name = "Cher" });
 //			Artistmatches.Add (new GhostArtist{ Name = "Eagle-Eye Cherry" });

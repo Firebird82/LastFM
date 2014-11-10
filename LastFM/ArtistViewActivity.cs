@@ -23,9 +23,6 @@ namespace LastFM
 
 			// Create your application here
 			SetContentView (Resource.Layout.ArtistView);
-		
-
-
 
 			GetArtist ();
 		}
