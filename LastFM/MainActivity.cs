@@ -6,7 +6,7 @@ using Android.Views;
 using Android.Widget;
 using Android.OS;
 using Android.Text;
-using Android 
+using Android;
 using System.Collections.Generic;
 
 namespace LastFM
