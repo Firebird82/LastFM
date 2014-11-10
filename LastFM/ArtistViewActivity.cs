@@ -8,6 +8,7 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
+using Android.Text;
 
 namespace LastFM
 {
@@ -21,19 +22,30 @@ namespace LastFM
 			base.OnCreate (bundle);
 
 			// Create your application here
+			SetContentView (Resource.Layout.ArtistView);
+		
+
+
+
 			GetArtist ();
 		}
 
 		public void GetArtist()
 		{
+			TextView artistName = FindViewById<TextView> (Resource.Id.twArtistName);
+			TextView artistBio = FindViewById<TextView> (Resource.Id.twArtistBio);
+			TextView artistPublished = FindViewById<TextView> (Resource.Id.twArtistPublished);
+			TextView artistFormed = FindViewById<TextView> (Resource.Id.twArtistYearFormed);
 
 			string query = Intent.GetStringExtra ("artist") ?? "Data not available";
 
 			var artist = RestSharpFunctions.GetArtist (query);
-			var name = artist.Name;
-			var summary = artist.Bio.Summary;
-			var yearformed = artist.Bio.YearFormed;
-			var published = artist.Bio.Published;
+			artistName.Text = artist.Name;
+			artistBio.TextFormatted = Html.FromHtml(artist.Bio.Summary);
+			artistFormed.Text = artist.Bio.YearFormed.ToString();
+			artistPublished.Text = artist.Bio.Published.ToString();
+
+			//artistBio.TextFormatted = Html.FromHtml(artist.Bio.Summary);
 			//var image = ?????;
 		}
 	}

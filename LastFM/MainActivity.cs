@@ -28,7 +28,7 @@ namespace LastFM
 
 			toArtist.Click += delegate {
 				var intent = new Intent (this, typeof(ArtistViewActivity));
-				intent.PutExtra ("artist", "Backstreet Boys");
+				intent.PutExtra ("artist", "Cher");
 				StartActivity (intent);
 			};
 
@@ -53,8 +53,7 @@ namespace LastFM
 			EditText searchQuery = FindViewById<EditText> (Resource.Id.searchtext);
 
 			var artist = RestSharpFunctions.GetArtist(searchQuery.Text);
-		//TextView artistBio = FindViewById<TextView> (Resource.Id.twArtistBio);
-		//artistBio.TextFormatted = Html.FromHtml(artist.Bio.Summary);
+
 
 		}
 	}
