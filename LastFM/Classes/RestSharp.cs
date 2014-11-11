@@ -63,7 +63,7 @@ namespace LastFM
 			return Execute<ArtistsCollection> (query, method);
 		}
 
-		public Album GetAlbum(string query)
+		public Album GetAlbum(string query, string queryId)
 		{
 			string method = "album.getinfo";
 			var album = Execute<Album> (query, method);
@@ -73,6 +73,19 @@ namespace LastFM
 		public AlbumCollection GetAlbumList(string query){
 			string method = "album.search";
 			return Execute<AlbumCollection> (query, method);
+		}
+
+
+		public Track GetTrack(string query)
+		{
+			string method = "track.getinfo";
+			var track = Execute<Track> (query, method);
+			return track;
+		}
+
+		public TrackCollection GetTrackList(string query){
+			string method = "track.search";
+			return Execute<TrackCollection> (query, method);
 		}
 	}
 }

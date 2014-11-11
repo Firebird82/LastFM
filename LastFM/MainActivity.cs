@@ -8,6 +8,7 @@ using Android.OS;
 using Android.Text;
 using Android;
 using System.Collections.Generic;
+using Android.Views.InputMethods;
 
 namespace LastFM
 {
@@ -17,6 +18,7 @@ namespace LastFM
 		RestSharp RestSharpFunctions;
 		List<Artist> artistList;
 		List<Album> albumList;
+		List<Track> trackList;
 
 		protected override void OnCreate (Bundle bundle)
 		{
@@ -27,30 +29,36 @@ namespace LastFM
 			RestSharpFunctions = new RestSharp ();
 			artistList = new List<Artist> ();
 			albumList = new List<Album> ();
+			trackList = new List<Track> ();
 		
 			Button artistSearchButton = FindViewById<Button> (Resource.Id.btnArtistSearch);
 			Button btnGetAlbums = FindViewById<Button> (Resource.Id.btnAlbumResult);
 			Button btnGetArtists = FindViewById<Button> (Resource.Id.btnArtistResult);
+			Button btnGetTracks = FindViewById<Button> (Resource.Id.btnSongResult);
+
 			ListView searchResultListview = FindViewById<ListView> (Resource.Id.lvArtistSearchResult);
 
-			EditText artistSearchQery = FindViewById<EditText> (Resource.Id.artistSearchtext);
+			EditText artistSearchQuery = FindViewById<EditText> (Resource.Id.artistSearchtext);
 			//Button albumSearchButton = FindViewById<Button> (Resource.Id.btnAlbumSearch);
 			//EditText albumSearchQery = FindViewById<EditText> (Resource.Id.albumSearchtext);
 
 			artistSearchButton.Click += delegate {
-
+				InputMethodManager imm = (InputMethodManager)GetSystemService(Context.InputMethodService); imm.HideSoftInputFromWindow(artistSearchQuery.WindowToken, 0);
 				artistList.Clear();
 				albumList.Clear();
-
-				ArtistSearchResult (artistSearchQery.Text, searchResultListview);
+				ArtistSearchResult (artistSearchQuery.Text, searchResultListview);
 			};
 		
 			btnGetAlbums.Click += delegate {
-				AlbumSearchResult (artistSearchQery.Text, searchResultListview);
+				AlbumSearchResult (artistSearchQuery.Text, searchResultListview);
 			};
 
 			btnGetArtists.Click += delegate {
-				ArtistSearchResult (artistSearchQery.Text, searchResultListview);
+				ArtistSearchResult (artistSearchQuery.Text, searchResultListview);
+			};
+
+			btnGetTracks.Click += delegate {
+				TrackSearchResult (artistSearchQuery.Text, searchResultListview);
 			};
 		}
 
@@ -84,6 +92,19 @@ namespace LastFM
 			searchResultListview.ItemClick += albumItemClick;		
 		}
 
+		public void TrackSearchResult (string query, ListView searchResultListview)
+		{
+			if (trackList.Count == 0) {
+
+				trackList = RestSharpFunctions.GetTrackList (query);
+
+			}
+
+			var tenTracks = trackList.GetRange (0, 10);
+			searchResultListview.Adapter = new TrackScreenAdapter (this, tenTracks);
+			searchResultListview.ItemClick += trackItemClick;		
+		}
+
 		public void artistItemClick (object sender, AdapterView.ItemClickEventArgs e)
 		{
 			var clickedArtist = artistList [e.Position];
@@ -94,11 +115,23 @@ namespace LastFM
 
 		public void albumItemClick (object sender, AdapterView.ItemClickEventArgs e)
 		{
-			var clickedAlbum = artistList [e.Position];
+			var clickedAlbum = albumList [e.Position];
 			var intent = new Intent (this, typeof(AlbumViewActivity));
 			intent.PutExtra ("album", clickedAlbum.Name);
+			intent.PutExtra ("albumid", clickedAlbum.Id);
+
 			StartActivity (intent);
 		}
+
+		public void trackItemClick (object sender, AdapterView.ItemClickEventArgs e)
+		{
+			var clickedTrack = trackList [e.Position];
+			var intent = new Intent (this, typeof(AlbumViewActivity));
+			intent.PutExtra ("track", clickedTrack.Name);
+			StartActivity (intent);
+		}
+
+
 	}
 }
 
