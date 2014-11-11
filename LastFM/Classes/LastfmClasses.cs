@@ -24,8 +24,6 @@ namespace LastFM
 	public class AlbumImageCollection : List<Image>{}
 	public class AlbumCollection : List<Album>{}
 
-
-
 	public class Artist
 	{
 		public string Name { get; set; }
@@ -41,7 +39,6 @@ namespace LastFM
 		public string Name { get; set; }
 		public string Url { get; set; }
 	}
-
 
 	public class Artistmatches
 	{

@@ -65,7 +65,6 @@ namespace LastFM
 			return album;
 		}
 
-
 		public AlbumCollection GetAlbumList(string query){
 			string method = "album.search";
 			return Execute<AlbumCollection> (query, method);

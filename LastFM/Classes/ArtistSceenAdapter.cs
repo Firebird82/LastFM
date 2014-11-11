@@ -12,23 +12,26 @@ using Android.Widget;
 
 namespace LastFM
 {
-	public class ArtistSceenAdapter:BaseAdapter<Artist>{
+	public class ArtistSceenAdapter:BaseAdapter<Artist>
+	{
 		List<Artist> items;
 		Activity context;
 
-		public ArtistSceenAdapter(Activity context, List<Artist> items):base(){
-		
+		public ArtistSceenAdapter(Activity context, List<Artist> items):base()
+		{
 			this.context = context;
 			this.items = items;
 		}
 
-		public override Artist this [int position] {
+		public override Artist this [int position]
+		{
 			get{ return items [position]; }
 		}
 
 		public override long GetItemId(int position)
 		{
-			return position;		}
+			return position;
+		}
 
 		public override View GetView(int position, View convertView, ViewGroup parent)
 		{
@@ -37,7 +40,8 @@ namespace LastFM
 			var artistImages = item.Image;
 			var coverphoto =  BitmapLoader.GetImageBitmapFromUrl(artistImages.First (i => i.Size.Equals ("small")).Value);
 
-			if (view == null) {
+			if (view == null) 
+			{
 				view = context.LayoutInflater.Inflate (Resource.Layout.artistListTemplate, null);
 			}
 
