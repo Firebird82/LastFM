@@ -20,6 +20,11 @@ namespace LastFM
 
 	public class ArtistImageCollection : List<Image> { }
 	public class ArtistSimilarCollection : List<Artist> { }
+	public class ArtistsCollection : List<Artist> { }
+	public class AlbumImageCollection : List<Image>{}
+	public class AlbumCollection : List<Album>{}
+
+
 
 	public class Artist
 	{
@@ -37,11 +42,24 @@ namespace LastFM
 		public string Url { get; set; }
 	}
 
-	public class ArtistsCollection : List<Artist> { }
 
 	public class Artistmatches
 	{
 		public ArtistsCollection artistsCollection { get; set; }
+	}
+
+	public class Album{
+		public string Name{ get; set; }
+		public string Artist{ get; set; }
+		public string Id{ get; set;}
+		public string Url{ get; set; }
+		public string Mbid{ get; set; }
+		public AlbumImageCollection Image{ get; set; }
+
+	}
+
+	public class Albummatches{
+		public AlbumCollection albumCollection{ get; set; }
 	}
 }
 

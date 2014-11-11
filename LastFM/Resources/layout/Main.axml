@@ -6,21 +6,43 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/searchtext"
+        android:id="@+id/artistSearchtext"
         android:hint="Search for artist" />
     <Button
-        android:id="@+id/btnSearch"
+        android:id="@+id/btnArtistSearch"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="Search" />
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/none" />
     <ListView
         android:minWidth="25px"
         android:minHeight="25px"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/lvSearchResult" />
+        android:id="@+id/lvArtistSearchResult" />
+    <ListView
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/lvAlbumSearchResult" />
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:rowCount="1"
+        android:columnCount="2">
+        <Button
+            android:text="Artist"
+            android:id="@+id/btnArtistResult"
+            android:layout_width="100dp"
+            android:layout_height="48dp"
+            android:padding="5dp"
+            android:layout_column="0" />
+        <Button
+            android:text="Album"
+            android:id="@+id/button2"
+            android:layout_width="100dp"
+            android:layout_height="48dp"
+            android:padding="5dp"
+            android:layout_column="1" />
+    </GridLayout>
 </LinearLayout>

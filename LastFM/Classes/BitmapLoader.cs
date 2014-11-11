@@ -35,7 +35,7 @@ namespace LastFM
 			using (var webClient = new WebClient())
 			{
 				var imageBytes = webClient.DownloadData(url);
-				if (imageBytes != null && imageBytes.Length > 0)
+				if (imageBytes != null)
 				{
 					imageBitmap = BitmapFactory.DecodeByteArray(imageBytes, 0, imageBytes.Length);
 				}

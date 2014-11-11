@@ -59,6 +59,8 @@
     <Compile Include="Classes\ArtistSceenAdapter.cs" />
     <Compile Include="Classes\SimilarScreenAdapter.cs" />
     <Compile Include="Classes\BitmapLoader.cs" />
+    <Compile Include="AlbumViewActivity.cs" />
+    <Compile Include="Classes\AlbumScreenAdapter.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -70,8 +72,9 @@
     <AndroidResource Include="Resources\values\Strings.xml" />
     <AndroidResource Include="Resources\drawable\Icon.png" />
     <AndroidResource Include="Resources\layout\ArtistView.axml" />
-    <AndroidResource Include="Resources\layout\ListViewTemp.axml" />
     <AndroidResource Include="Resources\layout\similarListTemplate.axml" />
+    <AndroidResource Include="Resources\layout\artistListTemplate.axml" />
+    <AndroidResource Include="Resources\layout\albumListTemplate.axml" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
   <ItemGroup>

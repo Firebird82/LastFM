@@ -12,17 +12,17 @@ using Android.Widget;
 
 namespace LastFM
 {
-	public class ArtistSceenAdapter:BaseAdapter<Artist>{
-		List<Artist> items;
+	public class AlbumScreenAdapter:BaseAdapter<Album>{
+		List<Album> items;
 		Activity context;
 
-		public ArtistSceenAdapter(Activity context, List<Artist> items):base(){
-		
+		public AlbumScreenAdapter(Activity context, List<Album> items):base(){
+
 			this.context = context;
 			this.items = items;
 		}
 
-		public override Artist this [int position] {
+		public override Album this [int position] {
 			get{ return items [position]; }
 		}
 
@@ -35,16 +35,17 @@ namespace LastFM
 			var item = items[position];
 			View view = convertView;
 			var artistImages = item.Image;
+
 			var coverphoto =  BitmapLoader.GetImageBitmapFromUrl(artistImages.First (i => i.Size.Equals ("small")).Value);
 
 			if (view == null) {
-				view = context.LayoutInflater.Inflate (Resource.Layout.artistListTemplate, null);
+				view = context.LayoutInflater.Inflate (Resource.Layout.albumListTemplate, null);
 			}
 
-			view.FindViewById<TextView> (Resource.Id.lvListArtistName).Text = item.Name;
+			view.FindViewById<TextView> (Resource.Id.tvAlbumName).Text = item.Name;
 
-			var imageView = view.FindViewById<ImageView> (Resource.Id.ivArtistImage);
-			imageView.SetImageBitmap(coverphoto);
+			var imageView = view.FindViewById<ImageView> (Resource.Id.ivAlbumImage);
+				imageView.SetImageBitmap (coverphoto);
 
 			return view;
 		}

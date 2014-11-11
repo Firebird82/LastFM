@@ -23,12 +23,12 @@ namespace LastFM
 
 		}
 
-		public T Execute<T> (string artistName,string method) where T : new()
+		public T Execute<T> (string query,string method) where T : new()
 		{
 			var client = new RestClient();
 			client.BaseUrl = "http://ws.audioscrobbler.com/";
 
-			var request = GetRequest (method, artistName);
+			var request = GetRequest (method, query);
 			var response = client.Execute<T>(request);
 			return response.Data;
 		}
@@ -56,6 +56,19 @@ namespace LastFM
 		{
 			string method = "artist.search";
 			return Execute<ArtistsCollection> (query, method);
+		}
+
+		public Album GetAlbum(string query)
+		{
+			string method = "album.getinfo";
+			var album = Execute<Album> (query, method);
+			return album;
+		}
+
+
+		public AlbumCollection GetAlbumList(string query){
+			string method = "album.search";
+			return Execute<AlbumCollection> (query, method);
 		}
 	}
 }

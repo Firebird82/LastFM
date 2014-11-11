@@ -14,9 +14,9 @@ namespace LastFM
 	[Activity (Label = "LastFM", MainLauncher = true, Icon = "@drawable/icon")]
 	public class MainActivity : Activity
 	{
-		RestSharp RestSharpFunctions = new RestSharp ();
-		GhostObjects ghost = new GhostObjects ();
-		List<Artist> artistList = new List<Artist> ();
+		RestSharp RestSharpFunctions;
+		List<Artist> artistList;
+		List<Album> albumList;
 
 		protected override void OnCreate (Bundle bundle)
 		{
@@ -24,29 +24,60 @@ namespace LastFM
 
 			// Set our view from the "main" layout resource
 			SetContentView (Resource.Layout.Main);
+			RestSharpFunctions = new RestSharp ();
+			artistList = new List<Artist> ();
+			albumList = new List<Album> ();
 		
-			Button searchButton = FindViewById<Button> (Resource.Id.btnSearch);
-			EditText searchQuery = FindViewById<EditText> (Resource.Id.searchtext);
+			Button artistSearchButton = FindViewById<Button> (Resource.Id.btnArtistSearch);
+			EditText artistSearchQery = FindViewById<EditText> (Resource.Id.artistSearchtext);
+			//Button albumSearchButton = FindViewById<Button> (Resource.Id.btnAlbumSearch);
+			//EditText albumSearchQery = FindViewById<EditText> (Resource.Id.albumSearchtext);
 
-			searchButton.Click += delegate {
-				SearchResult (searchQuery.Text);
+			artistSearchButton.Click += delegate {
+				ArtistSearchResult (artistSearchQery.Text);
 			};
+
+		/*	albumSearchButton.Click += delegate {
+				AlbumSearchResult (albumSearchQery.Text);
+			};
+		*/
 		}
 
-		public void SearchResult (string searchQuery)
+		public void ArtistSearchResult (string query)
 		{
 
-			artistList =  RestSharpFunctions.GetArtistList(searchQuery);
-			ListView lView = FindViewById<ListView> (Resource.Id.lvSearchResult);
-			lView.Adapter = new ArtistSceenAdapter (this, artistList);
-			lView.ItemClick += OnListItemClick;
+			ListView artistListview = FindViewById<ListView> (Resource.Id.lvArtistSearchResult);
+			artistList =  RestSharpFunctions.GetArtistList(query);
+			var tenArtist = artistList.GetRange (0,10);
+			artistListview.Adapter = new ArtistSceenAdapter (this, tenArtist);
+			artistListview.ItemClick += artistItemClick;
 		}
 
-		public void OnListItemClick(object sender, AdapterView.ItemClickEventArgs e)
+
+		public void AlbumSearchResult(string query){
+		
+			ListView albumListview = FindViewById<ListView> (Resource.Id.lvArtistSearchResult);
+			albumList= RestSharpFunctions.GetAlbumList(query);
+			var tenAlbums = albumList.GetRange (0,10);
+			albumListview.Adapter = new AlbumScreenAdapter (this, tenAlbums);
+			albumListview.ItemClick += albumItemClick;
+		
+		
+		}
+
+		public void artistItemClick(object sender, AdapterView.ItemClickEventArgs e)
 		{
 			var clickedArtist = artistList[e.Position];
 			var intent = new Intent (this, typeof(ArtistViewActivity));
 			intent.PutExtra ("artist", clickedArtist.Name);
+			StartActivity (intent);
+		}
+
+		public void albumItemClick(object sender, AdapterView.ItemClickEventArgs e)
+		{
+			var clickedAlbum = artistList[e.Position];
+			var intent = new Intent (this, typeof(AlbumViewActivity));
+			intent.PutExtra ("album", clickedAlbum.Name);
 			StartActivity (intent);
 		}
 	}
