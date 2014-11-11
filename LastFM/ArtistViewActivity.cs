@@ -48,6 +48,9 @@ namespace LastFM
 			ListView listView = FindViewById<ListView> (Resource.Id.similarList);
 			listView.Adapter = new SimilarScreenAdapter(this, artist.Similar);
 			listView.ItemClick += OnListItemClick;
+
+			ScrollView scrollArtist = FindViewById<ScrollView> (Resource.Id.scrollArtistView);
+			scrollArtist.SmoothScrollTo(0, 0);
 		}
 
 		public void OnListItemClick(object sender, AdapterView.ItemClickEventArgs e)

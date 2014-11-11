@@ -49,11 +49,11 @@ namespace LastFM
 			string method = "artist.getinfo";
 			var artist = Execute<Artist> (query, method);
 
-			if (artist.Similar.Count > 0) {
+			if (artist.Similar.Count > 0) 
+			{
 				artist.Similar.RemoveAt(0);
 			}
 
-			artist.Similar.RemoveAt(0);
 			return artist;
 		}
 
@@ -70,7 +70,8 @@ namespace LastFM
 			return album;
 		}
 
-		public AlbumCollection GetAlbumList(string query){
+		public AlbumCollection GetAlbumList(string query)
+		{
 			string method = "album.search";
 			return Execute<AlbumCollection> (query, method);
 		}
@@ -83,7 +84,8 @@ namespace LastFM
 			return track;
 		}
 
-		public TrackCollection GetTrackList(string query){
+		public TrackCollection GetTrackList(string query)
+		{
 			string method = "track.search";
 			return Execute<TrackCollection> (query, method);
 		}
