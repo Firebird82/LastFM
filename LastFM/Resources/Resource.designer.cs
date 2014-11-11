@@ -87,14 +87,14 @@ namespace LastFM
 			// aapt resource value: 0x7f060009
 			public const int searchtext = 2131099657;
 			
+			// aapt resource value: 0x7f060005
+			public const int similarHeader = 2131099653;
+			
 			// aapt resource value: 0x7f060006
 			public const int similarList = 2131099654;
 			
 			// aapt resource value: 0x7f060004
 			public const int textView4 = 2131099652;
-			
-			// aapt resource value: 0x7f060005
-			public const int textView5 = 2131099653;
 			
 			// aapt resource value: 0x7f060001
 			public const int twArtistBio = 2131099649;
