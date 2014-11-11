@@ -28,21 +28,34 @@ namespace LastFM
 			var client = new RestClient();
 			client.BaseUrl = "http://ws.audioscrobbler.com/";
 
-			var request = GetRequest (method, query);
+			T argType = new T ();
+			string type = argType.GetType ().ToString ();
+
+			var request = GetRequest (method, query,type);
 			var response = client.Execute<T>(request);
 			return response.Data;
 		}
 
-		 RestRequest GetRequest (string methodValue, string searchString)
+		RestRequest GetRequest (string methodValue, string searchString,string type)
 		{
 			var parameterKey = (methodValue.Split ('.')) [0];
 			var request = new RestRequest("/2.0/", Method.GET);
 			request.AddParameter("method", methodValue); // album.search
-			request.AddParameter(parameterKey, searchString); // album, albumName
 			request.AddParameter("api_key", "e527758dd1063dd021d7b8bb180ffd44");
 			request.RequestFormat = DataFormat.Json;
+			if (type == "LastFM.Album") {
+			
+				request.AddParameter("mbid", searchString); // album, albumName
+			}
+			else {
+					request.AddParameter(parameterKey, searchString); // album, albumName
+			}
+
 			return request;
 		}
+
+
+
 
 		public Artist GetArtist(string query)
 		{
@@ -66,7 +79,7 @@ namespace LastFM
 		public Album GetAlbum(string query, string queryId)
 		{
 			string method = "album.getinfo";
-			var album = Execute<Album> (query, method);
+			var album = Execute<Album> (queryId, method);
 			return album;
 		}
 

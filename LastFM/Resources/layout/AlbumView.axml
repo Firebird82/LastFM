@@ -15,7 +15,9 @@
         android:layout_height="wrap_content"
         android:id="@+id/twSelectedAlbumArtist" />
     <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:src="@android:drawable/ic_menu_gallery"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:padding="5dp"
         android:id="@+id/ivSelectedAlbumImage" />
 </LinearLayout>

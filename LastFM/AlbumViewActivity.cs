@@ -37,7 +37,7 @@ namespace LastFM
 			ImageView albumImage = FindViewById<ImageView> (Resource.Id.ivSelectedAlbumImage);
 			var album = RestSharpFunctions.GetAlbum (query,queryId);
 			var albumImages = album.Image;
-			var coverphoto =  BitmapLoader.GetImageBitmapFromUrl(albumImages.First (i => i.Size.Equals ("medium")).Value);
+			var coverphoto =  BitmapLoader.GetImageBitmapFromUrl(albumImages.First (i => i.Size.Equals ("large")).Value);
 
 			albumName.Text = album.Name;
 			artistName.Text = album.Artist;

@@ -118,7 +118,7 @@ namespace LastFM
 			var clickedAlbum = albumList [e.Position];
 			var intent = new Intent (this, typeof(AlbumViewActivity));
 			intent.PutExtra ("album", clickedAlbum.Name);
-			intent.PutExtra ("albumid", clickedAlbum.Id);
+			intent.PutExtra ("albumid", clickedAlbum.Mbid);
 
 			StartActivity (intent);
 		}
