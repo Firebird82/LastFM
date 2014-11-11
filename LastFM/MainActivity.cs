@@ -45,14 +45,17 @@ namespace LastFM
 
 		public void ArtistSearchResult (string query)
 		{
-
 			ListView artistListview = FindViewById<ListView> (Resource.Id.lvArtistSearchResult);
 			artistList =  RestSharpFunctions.GetArtistList(query);
-			var tenArtist = artistList.GetRange (0,10);
+
+			var tenArtist = new List<Artist>();
+			if (artistList.Count > 10) {
+				tenArtist = artistList.GetRange (0,10);
+			}
+
 			artistListview.Adapter = new ArtistSceenAdapter (this, tenArtist);
 			artistListview.ItemClick += artistItemClick;
 		}
-
 
 		public void AlbumSearchResult(string query){
 		

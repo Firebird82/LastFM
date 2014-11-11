@@ -1,43 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:minWidth="25px"
-    android:minHeight="25px">
-    <TextView
-        android:layout_width="match_parent"
+    android:paddingRight="20dp"
+    android:paddingLeft="20dp">
+    <ScrollView
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/twArtistName" />
-    <TextView
-        android:text="Text"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/twArtistBio" />
-    <TextView
-        android:text="Text"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/twArtistYearFormed" />
-    <TextView
-        android:text="Text"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/twArtistPublished" />
-    <TextView
-        android:text=" "
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/textView4" />
-    <TextView
-        android:text="Similar Artists:"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/similarHeader" />
-    <ListView
-        android:minWidth="25px"
-        android:minHeight="25px"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/similarList" />
+        android:id="@+id/scrollArtistView">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:text="Name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textSize="32dp"
+                android:focusableInTouchMode="true"
+                android:id="@+id/twArtistName"
+                android:paddingTop="20dp"
+                android:paddingBottom="10dp" />
+            <TextView
+                android:text="Bio"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/twArtistBio" />
+            <TextView
+                android:text="YearFormed"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/twArtistYearFormed" />
+            <TextView
+                android:text="Published"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/twArtistPublished" />
+            <TextView
+                android:text="Similar Artists"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="20dp"
+                android:gravity="center"
+                android:id="@+id/similarHeader"
+                android:paddingTop="10dp" />
+            <ListView
+                android:minWidth="25px"
+                android:minHeight="25px"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:id="@+id/similarList" />
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>

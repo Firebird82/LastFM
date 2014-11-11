@@ -19,7 +19,6 @@ namespace LastFM
 		RestSharp RestSharpFunctions = new RestSharp();
 		Artist artist = new Artist();
 
-
 		protected override void OnCreate (Bundle bundle)
 		{
 			base.OnCreate (bundle);

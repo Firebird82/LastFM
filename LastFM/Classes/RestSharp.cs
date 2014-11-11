@@ -48,6 +48,11 @@ namespace LastFM
 		{
 			string method = "artist.getinfo";
 			var artist = Execute<Artist> (query, method);
+
+			if (artist.Similar.Count > 0) {
+				artist.Similar.RemoveAt(0);
+			}
+
 			artist.Similar.RemoveAt(0);
 			return artist;
 		}
