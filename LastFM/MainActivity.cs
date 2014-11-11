@@ -60,9 +60,7 @@ namespace LastFM
 			albumList= RestSharpFunctions.GetAlbumList(query);
 			var tenAlbums = albumList.GetRange (0,10);
 			albumListview.Adapter = new AlbumScreenAdapter (this, tenAlbums);
-			albumListview.ItemClick += albumItemClick;
-		
-		
+			albumListview.ItemClick += albumItemClick;		
 		}
 
 		public void artistItemClick(object sender, AdapterView.ItemClickEventArgs e)

@@ -25,15 +25,15 @@
         android:layout_height="wrap_content"
         android:id="@+id/twArtistPublished" />
     <TextView
-        android:text="Text"
+        android:text=" "
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/textView4" />
     <TextView
-        android:text="Text"
+        android:text="Similar Artists:"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/textView5" />
+        android:id="@+id/similarHeader" />
     <ListView
         android:minWidth="25px"
         android:minHeight="25px"

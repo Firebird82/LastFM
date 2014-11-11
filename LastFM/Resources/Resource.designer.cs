@@ -96,14 +96,14 @@ namespace LastFM
 			// aapt resource value: 0x7f060003
 			public const int lvListArtistName = 2131099651;
 			
+			// aapt resource value: 0x7f060009
+			public const int similarHeader = 2131099657;
+			
 			// aapt resource value: 0x7f06000a
 			public const int similarList = 2131099658;
 			
 			// aapt resource value: 0x7f060008
 			public const int textView4 = 2131099656;
-			
-			// aapt resource value: 0x7f060009
-			public const int textView5 = 2131099657;
 			
 			// aapt resource value: 0x7f060001
 			public const int tvAlbumName = 2131099649;
