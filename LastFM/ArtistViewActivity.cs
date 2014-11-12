@@ -44,7 +44,11 @@ namespace LastFM
 			artistBio.TextFormatted = Html.FromHtml(artist.Bio.Summary);
 			artistBio.MovementMethod = LinkMovementMethod.Instance;
 			artistFormed.Text = artist.Bio.YearFormed.ToString();
-			artistPublished.Text = artist.Bio.Published.ToString();
+
+			if (artist.Bio.Published != null) 
+			{
+				artistPublished.Text = artist.Bio.Published.ToString("MMM/yyyy");
+			}
 
 			var similarArtists = new List<Artist> ();
 			foreach (var similar in artist.Similar) 
