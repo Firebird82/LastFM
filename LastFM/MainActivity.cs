@@ -45,7 +45,8 @@ namespace LastFM
 			//Button albumSearchButton = FindViewById<Button> (Resource.Id.btnAlbumSearch);
 			//EditText albumSearchQery = FindViewById<EditText> (Resource.Id.albumSearchtext);
 
-			artistSearchButton.Click += delegate {
+			artistSearchButton.Click += delegate 
+			{
 				InputMethodManager imm = (InputMethodManager)GetSystemService(Context.InputMethodService); imm.HideSoftInputFromWindow(artistSearchQuery.WindowToken, 0);
 				artistList.Clear();
 				albumList.Clear();
@@ -77,7 +78,8 @@ namespace LastFM
 			}
 
 			var tenArtist = new List<Artist>();
-			if (artistList.Count > 10) {
+			if (artistList.Count > 10) 
+			{
 				tenArtist = artistList.GetRange (0,10);
 			}	
 
@@ -99,10 +101,9 @@ namespace LastFM
 
 		public void TrackSearchResult (string query, ListView searchResultListview)
 		{
-			if (trackList.Count == 0) {
-
+			if (trackList.Count == 0)
+			{
 				trackList = RestSharpFunctions.GetTrackList (query);
-
 			}
 
 			var tenTracks = trackList.GetRange (0, 10);
@@ -137,8 +138,6 @@ namespace LastFM
 			intent.PutExtra ("track", clickedTrack.Name);
 			StartActivity (intent);
 		}
-
-
 	}
 }
 

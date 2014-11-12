@@ -44,9 +44,7 @@ namespace LastFM
 					}
 
 				}
-
 			}
-
 			return imageBitmap;
 		}
 

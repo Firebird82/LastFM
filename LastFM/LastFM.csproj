@@ -55,9 +55,7 @@
     <Compile Include="Classes\LastfmClasses.cs" />
     <Compile Include="ArtistViewActivity.cs" />
     <Compile Include="Classes\GhostObjects.cs" />
-    <Compile Include="SearchActivity.cs" />
     <Compile Include="Classes\ArtistSceenAdapter.cs" />
-    <Compile Include="Classes\SimilarScreenAdapter.cs" />
     <Compile Include="Classes\BitmapLoader.cs" />
     <Compile Include="AlbumViewActivity.cs" />
     <Compile Include="Classes\AlbumScreenAdapter.cs" />

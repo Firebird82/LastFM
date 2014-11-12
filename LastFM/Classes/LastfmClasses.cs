@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-//using System.Xml.Serialization;
 
 namespace LastFM
 {
@@ -26,7 +25,6 @@ namespace LastFM
 	public class TrackCollection : List<Track>{}
 	public class TackImageCollection: List<Image>{}
 
-
 	public class Artist
 	{
 		public string Name { get; set; }
@@ -48,7 +46,8 @@ namespace LastFM
 		public ArtistsCollection artistsCollection { get; set; }
 	}
 
-	public class Album{
+	public class Album
+	{
 		public string Name{ get; set; }
 		public string Artist{ get; set; }
 		public string Id{ get; set;}
@@ -58,31 +57,30 @@ namespace LastFM
 		public string Releasedate{ get; set; }
 		public TrackCollection Tracks { get; set; }
 		public Albumbio Wiki{ get; set;}
-
 	}
 
-	public class Albumbio{
+	public class Albumbio
+	{
 		public string Summary { get; set; }
 		public string Content { get; set; }
-
 	}
 
 	public class Albummatches{
 		public AlbumCollection albumCollection{ get; set; }
 	}
 
-	public class Track{
-
+	public class Track
+	{
 		public string Name{ get; set; }
 		public string Artist{ get; set; }
 		public string Url{ get; set; }
 		public string Mbid{ get; set; }
 		public double Duration{ get; set; }
 		public TackImageCollection Image{ get; set; }
-
 	}
 
-	public class Trackmatches{
+	public class Trackmatches
+	{
 		public TrackCollection trackCollection{ get; set; }
 	}
 }
