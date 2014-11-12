@@ -20,24 +20,15 @@
                 android:textSize="32dp"
                 android:focusableInTouchMode="true"
                 android:id="@+id/twArtistName"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp" />
-        <!--            <GridLayout
-                android:layout_width="match_parent"
-                android:layout_height="20dp"
-                android:rowCount="1"
-                android:columnCount="2"
-                android:layout_gravity="center">-->
+                android:paddingTop="10dp" />
             <ImageView
                 android:src="@android:drawable/ic_menu_gallery"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:rowCount="1"
                 android:columnCount="2"
-                android:padding="5dp"
                 android:layout_gravity="center"
                 android:id="@+id/ivSelectedArtistImage" />
-        <!--	        </GridLayout>-->
             <TextView
                 android:text="Bio"
                 android:layout_width="match_parent"

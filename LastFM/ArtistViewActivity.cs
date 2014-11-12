@@ -49,6 +49,11 @@ namespace LastFM
 			listView.Adapter = new SimilarScreenAdapter(this, artist.Similar);
 			listView.ItemClick += OnListItemClick;
 
+			ImageView artistImage = FindViewById<ImageView> (Resource.Id.ivSelectedArtistImage);
+			var artistImages = artist.Image;
+			var artistPhoto =  BitmapLoader.GetImageBitmapFromUrl(artistImages.First (i => i.Size.Equals ("mega")).Value);
+			artistImage.SetImageBitmap(artistPhoto);
+
 			ScrollView scrollArtist = FindViewById<ScrollView> (Resource.Id.scrollArtistView);
 			scrollArtist.SmoothScrollTo(0, 0);
 		}
