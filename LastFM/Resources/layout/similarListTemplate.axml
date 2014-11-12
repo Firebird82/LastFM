@@ -4,14 +4,19 @@
     android:layout_height="match_parent"
     android:rowCount="1"
     android:columnCount="2">
-    <TextView
-        android:text=""
-        android:textSize="14dip"
+    <ImageView
+        android:src="@android:drawable/ic_menu_gallery"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:padding="5dp"
         android:layout_column="0"
-        android:id="@+id/SimilarImage" />
+        android:layout_alignParentRight="true"
+        android:id="@+id/similarImageList" />
     <TextView
-        android:text=""
+        android:text="Cell 1"
         android:textSize="14dip"
+        android:padding="5dp"
+        android:layout_marginTop="10dp"
         android:layout_column="1"
         android:id="@+id/SimilarName" />
 </GridLayout>

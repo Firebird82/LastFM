@@ -45,8 +45,13 @@ namespace LastFM
 			artistFormed.Text = artist.Bio.YearFormed.ToString();
 			artistPublished.Text = artist.Bio.Published.ToString();
 
+			var similarArtists = new List<Artist> ();
+			foreach (var similar in artist.Similar) {
+				similarArtists.Add(new Artist{ Name = similar.Name, Image = similar.Image });
+			}
+
 			ListView listView = FindViewById<ListView> (Resource.Id.similarList);
-			listView.Adapter = new SimilarScreenAdapter(this, artist.Similar);
+			listView.Adapter = new ArtistSceenAdapter(this, similarArtists);
 			listView.ItemClick += OnListItemClick;
 
 			ImageView artistImage = FindViewById<ImageView> (Resource.Id.ivSelectedArtistImage);
