@@ -43,10 +43,12 @@ namespace LastFM
 			request.AddParameter("method", methodValue); // album.search
 			request.AddParameter("api_key", "e527758dd1063dd021d7b8bb180ffd44");
 			request.RequestFormat = DataFormat.Json;
-			if (type == "LastFM.Album") {
+		
+			if (type == "LastFM.Album" || type == "LastFM.Artist") {
 			
-				request.AddParameter("mbid", searchString); // album, albumName
-			}
+					request.AddParameter ("mbid", searchString);
+				}
+
 			else {
 					request.AddParameter(parameterKey, searchString); // album, albumName
 			}
@@ -57,10 +59,10 @@ namespace LastFM
 
 
 
-		public Artist GetArtist(string query)
+		public Artist GetArtist(string query, string queryId)
 		{
 			string method = "artist.getinfo";
-			var artist = Execute<Artist> (query, method);
+			var artist = Execute<Artist> (queryId, method);
 
 			if (artist.Similar.Count > 0) 
 			{

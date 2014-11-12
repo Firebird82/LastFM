@@ -1,23 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:minWidth="25px"
-    android:minHeight="25px">
-    <TextView
-        android:layout_width="match_parent"
+    android:paddingRight="20dp"
+    android:paddingLeft="20dp">
+    <ScrollView
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/twSelectedAlbumName" />
-    <TextView
-        android:text="Text"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/twSelectedAlbumArtist" />
-    <ImageView
-        android:src="@android:drawable/ic_menu_gallery"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:padding="5dp"
-        android:id="@+id/ivSelectedAlbumImage" />
+        android:id="@+id/scrollAlbumView">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:text="Name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textSize="32dp"
+                android:focusableInTouchMode="true"
+                android:id="@+id/tvSelectedAlbumName"
+                android:paddingTop="10dp"
+                android:paddingBottom="0dp" />
+            <TextView
+                android:text="Artist"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textSize="14dp"
+                android:focusableInTouchMode="true"
+                android:id="@+id/tvSelectedArtistName"
+                android:paddingTop="0dp"
+                android:paddingBottom="5dp" />
+        <!--            <GridLayout
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:rowCount="1"
+                android:columnCount="2"
+                android:layout_gravity="center">-->
+            <ImageView
+                android:src="@android:drawable/ic_menu_gallery"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:rowCount="1"
+                android:columnCount="2"
+                android:padding="5dp"
+                android:layout_gravity="center"
+                android:id="@+id/ivSelectedAlbumImage" />
+        <!--	        </GridLayout>-->
+            <TextView
+                android:text="Realease date:"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="20dp"
+                android:textSize="12dp"
+                android:id="@+id/tvRealeseDate" />
+            <TextView
+                android:text="Bio"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="20dp"
+                android:id="@+id/tvalbumBio" />
+            <TextView
+                android:text=""
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="20dp"
+                android:id="@+id/tvTracks" />
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>

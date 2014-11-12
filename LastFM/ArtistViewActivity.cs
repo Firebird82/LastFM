@@ -37,8 +37,9 @@ namespace LastFM
 			TextView artistFormed = FindViewById<TextView> (Resource.Id.formedYearArtist);
 
 			string query = Intent.GetStringExtra ("artist") ?? "Data not available";
+			string queryId = Intent.GetStringExtra ("artistId") ?? "Data not available";
 
-			artist = RestSharpFunctions.GetArtist (query);
+			artist = RestSharpFunctions.GetArtist (query,queryId);
 			artistName.Text = artist.Name;
 			artistBio.TextFormatted = Html.FromHtml(artist.Bio.Summary);
 			artistBio.MovementMethod = LinkMovementMethod.Instance;
@@ -57,7 +58,9 @@ namespace LastFM
 		{
 			var clickedArtist = artist.Similar[e.Position];
 			var intent = new Intent (this, typeof(ArtistViewActivity));
+			intent.PutExtra ("artistId", clickedArtist.Mbid);
 			intent.PutExtra ("artist", clickedArtist.Name);
+
 			StartActivity (intent);
 		}
 	}

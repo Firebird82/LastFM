@@ -36,7 +36,10 @@ namespace LastFM
 			Button btnGetArtists = FindViewById<Button> (Resource.Id.btnArtistResult);
 			Button btnGetTracks = FindViewById<Button> (Resource.Id.btnSongResult);
 
-			ListView searchResultListview = FindViewById<ListView> (Resource.Id.lvArtistSearchResult);
+			ListView artistSearchResultListview = FindViewById<ListView> (Resource.Id.lvArtistSearchResult);
+			ListView albumSearchResultListview = FindViewById<ListView> (Resource.Id.lvAlbumSearchResult);
+
+
 
 			EditText artistSearchQuery = FindViewById<EditText> (Resource.Id.artistSearchtext);
 			//Button albumSearchButton = FindViewById<Button> (Resource.Id.btnAlbumSearch);
@@ -46,19 +49,21 @@ namespace LastFM
 				InputMethodManager imm = (InputMethodManager)GetSystemService(Context.InputMethodService); imm.HideSoftInputFromWindow(artistSearchQuery.WindowToken, 0);
 				artistList.Clear();
 				albumList.Clear();
-				ArtistSearchResult (artistSearchQuery.Text, searchResultListview);
+				ArtistSearchResult (artistSearchQuery.Text, artistSearchResultListview);
 			};
 		
 			btnGetAlbums.Click += delegate {
-				AlbumSearchResult (artistSearchQuery.Text, searchResultListview);
+				artistSearchResultListview.Adapter = null;
+				AlbumSearchResult (artistSearchQuery.Text, albumSearchResultListview);
 			};
 
 			btnGetArtists.Click += delegate {
-				ArtistSearchResult (artistSearchQuery.Text, searchResultListview);
+				albumSearchResultListview.Adapter = null;
+				ArtistSearchResult (artistSearchQuery.Text, artistSearchResultListview);
 			};
 
 			btnGetTracks.Click += delegate {
-				TrackSearchResult (artistSearchQuery.Text, searchResultListview);
+				TrackSearchResult (artistSearchQuery.Text, artistSearchResultListview);
 			};
 		}
 
@@ -83,7 +88,7 @@ namespace LastFM
 		public void AlbumSearchResult (string query, ListView searchResultListview)
 		{
 			if (albumList.Count == 0)
-			{
+			{	
 				albumList = RestSharpFunctions.GetAlbumList (query);
 			}
 
@@ -110,6 +115,8 @@ namespace LastFM
 			var clickedArtist = artistList [e.Position];
 			var intent = new Intent (this, typeof(ArtistViewActivity));
 			intent.PutExtra ("artist", clickedArtist.Name);
+			intent.PutExtra ("artistId", clickedArtist.Mbid);
+
 			StartActivity (intent);
 		}
 

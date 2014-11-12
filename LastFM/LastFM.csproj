@@ -62,6 +62,7 @@
     <Compile Include="AlbumViewActivity.cs" />
     <Compile Include="Classes\AlbumScreenAdapter.cs" />
     <Compile Include="Classes\TrackScreenAdapter.cs" />
+    <Compile Include="Classes\AlbumTrackScreenAdapter.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -78,6 +79,7 @@
     <AndroidResource Include="Resources\layout\albumListTemplate.axml" />
     <AndroidResource Include="Resources\layout\trackListTempelate.axml" />
     <AndroidResource Include="Resources\layout\AlbumView.axml" />
+    <AndroidResource Include="Resources\layout\albumTrackListTempelate.axml" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
   <ItemGroup>

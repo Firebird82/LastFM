@@ -77,6 +77,7 @@ namespace LastFM
 		public string Artist{ get; set; }
 		public string Url{ get; set; }
 		public string Mbid{ get; set; }
+		public double Duration{ get; set; }
 		public TackImageCollection Image{ get; set; }
 
 	}
