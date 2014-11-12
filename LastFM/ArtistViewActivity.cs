@@ -33,8 +33,8 @@ namespace LastFM
 		{
 			TextView artistName = FindViewById<TextView> (Resource.Id.twArtistName);
 			TextView artistBio = FindViewById<TextView> (Resource.Id.twArtistBio);
-			TextView artistPublished = FindViewById<TextView> (Resource.Id.twArtistPublished);
-			TextView artistFormed = FindViewById<TextView> (Resource.Id.twArtistYearFormed);
+			TextView artistPublished = FindViewById<TextView> (Resource.Id.publishedYearArtist);
+			TextView artistFormed = FindViewById<TextView> (Resource.Id.formedYearArtist);
 
 			string query = Intent.GetStringExtra ("artist") ?? "Data not available";
 

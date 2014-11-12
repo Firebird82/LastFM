@@ -20,23 +20,58 @@
                 android:textSize="32dp"
                 android:focusableInTouchMode="true"
                 android:id="@+id/twArtistName"
-                android:paddingTop="20dp"
+                android:paddingTop="10dp"
                 android:paddingBottom="10dp" />
             <TextView
                 android:text="Bio"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:paddingBottom="20dp"
                 android:id="@+id/twArtistBio" />
-            <TextView
-                android:text="YearFormed"
+            <GridLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/twArtistYearFormed" />
-            <TextView
-                android:text="Published"
+                android:layout_height="20dp"
+                android:rowCount="1"
+                android:columnCount="2"
+                android:layout_gravity="center">
+                <TextView
+                    android:layout_row="0"
+                    android:layout_column="0"
+                    android:layout_gravity="left"
+                    android:text="Formed Year: "
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:layout_row="0"
+                    android:layout_column="1"
+                    android:layout_gravity="left"
+                    android:text="Year"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/formedYearArtist" />
+            </GridLayout>
+            <GridLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/twArtistPublished" />
+                android:layout_height="20dp"
+                android:rowCount="1"
+                android:columnCount="2"
+                android:layout_gravity="center">
+                <TextView
+                    android:layout_row="0"
+                    android:layout_column="0"
+                    android:layout_gravity="left"
+                    android:text="Published: "
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:layout_row="0"
+                    android:layout_column="1"
+                    android:layout_gravity="left"
+                    android:text="Year"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/publishedYearArtist" />
+            </GridLayout>
             <TextView
                 android:text="Similar Artists"
                 android:layout_width="match_parent"
