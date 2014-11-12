@@ -46,7 +46,8 @@ namespace LastFM
 			artistPublished.Text = artist.Bio.Published.ToString();
 
 			var similarArtists = new List<Artist> ();
-			foreach (var similar in artist.Similar) {
+			foreach (var similar in artist.Similar) 
+			{
 				similarArtists.Add(new Artist{ Name = similar.Name, Image = similar.Image });
 			}
 

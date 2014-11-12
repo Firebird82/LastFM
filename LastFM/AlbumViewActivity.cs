@@ -27,8 +27,8 @@ namespace LastFM
 			GetAlbum ();
 		}
 
-		public void GetAlbum(){
-
+		public void GetAlbum()
+		{
 			string query = Intent.GetStringExtra ("album") ?? "Data not available";
 			string queryId = Intent.GetStringExtra ("albumid") ?? "Data not available";
 
@@ -42,9 +42,6 @@ namespace LastFM
 			albumName.Text = album.Name;
 			artistName.Text = album.Artist;
 			albumImage.SetImageBitmap(coverphoto);
-
-
-
 		}
 	}
 }

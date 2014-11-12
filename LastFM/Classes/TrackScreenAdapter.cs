@@ -16,8 +16,8 @@ namespace LastFM
 		List<Track> items;
 		Activity context;
 
-		public TrackScreenAdapter(Activity context, List<Track> items):base(){
-
+		public TrackScreenAdapter(Activity context, List<Track> items):base()
+		{
 			this.context = context;
 			this.items = items;
 		}
@@ -28,7 +28,8 @@ namespace LastFM
 
 		public override long GetItemId(int position)
 		{
-			return position;		}
+			return position;		
+		}
 
 		public override View GetView(int position, View convertView, ViewGroup parent)
 		{
