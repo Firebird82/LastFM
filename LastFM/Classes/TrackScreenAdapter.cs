@@ -12,7 +12,8 @@ using Android.Widget;
 
 namespace LastFM
 {
-	public class TrackScreenAdapter:BaseAdapter<Track>{
+	public class TrackScreenAdapter:BaseAdapter<Track>
+	{
 		List<Track> items;
 		Activity context;
 
@@ -22,7 +23,8 @@ namespace LastFM
 			this.items = items;
 		}
 
-		public override Track this [int position] {
+		public override Track this [int position] 
+		{
 			get{ return items [position]; }
 		}
 
@@ -34,10 +36,11 @@ namespace LastFM
 		public override View GetView(int position, View convertView, ViewGroup parent)
 		{
 			var item = items[position];
-			View view = convertView;
-			var artistImages = item.Image;
 
+			var artistImages = item.Image;
 			var coverphoto =  BitmapLoader.GetImageBitmapFromUrl(artistImages.First (i => i.Size.Equals ("small")).Value);
+
+			View view = convertView;
 
 			if (view == null) {
 				view = context.LayoutInflater.Inflate (Resource.Layout.trackListTempelate, null);

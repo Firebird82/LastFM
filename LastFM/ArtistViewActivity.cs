@@ -31,42 +31,91 @@ namespace LastFM
 
 		public void GetArtist()
 		{
-			TextView artistName = FindViewById<TextView> (Resource.Id.twArtistName);
-			TextView artistBio = FindViewById<TextView> (Resource.Id.twArtistBio);
-			TextView artistPublished = FindViewById<TextView> (Resource.Id.publishedYearArtist);
-			TextView artistFormed = FindViewById<TextView> (Resource.Id.formedYearArtist);
-
 			string query = Intent.GetStringExtra ("artist") ?? "Data not available";
 			string queryId = Intent.GetStringExtra ("artistId") ?? "Data not available";
 
 			artist = RestSharpFunctions.GetArtist (query,queryId);
-			artistName.Text = artist.Name;
-			artistBio.TextFormatted = Html.FromHtml(artist.Bio.Summary);
-			artistBio.MovementMethod = LinkMovementMethod.Instance;
-			artistFormed.Text = artist.Bio.YearFormed.ToString();
 
-			if (artist.Bio.Published != null) 
-			{
-				artistPublished.Text = artist.Bio.Published.ToString("MMM/yyyy");
-			}
+			AddDataToArtistView ();
+		}
 
+		void AddDataToArtistView ()
+		{
+			AddTextViewDataToArtist ();
+			AddSimilarListToArtist ();
+			AddArtistImage ();
+			ScrollviewHack ();
+		}
+
+		void ScrollviewHack ()
+		{
+			ScrollView scrollArtist = FindViewById<ScrollView> (Resource.Id.scrollArtistView);
+			scrollArtist.SmoothScrollTo (0, 0);
+		}
+
+		void AddArtistImage ()
+		{
+			var artistImages = artist.Image;
+			var artistPhoto = BitmapLoader.GetImageBitmapFromUrl (artistImages.First (i => i.Size.Equals ("mega")).Value);
+			ImageView artistImage = FindViewById<ImageView> (Resource.Id.ivSelectedArtistImage);
+			artistImage.SetImageBitmap (artistPhoto);
+		}
+
+		List<Artist> AddSimilarListToArtist ()
+		{
 			var similarArtists = new List<Artist> ();
 			foreach (var similar in artist.Similar) 
 			{
-				similarArtists.Add(new Artist{ Name = similar.Name, Image = similar.Image });
+				similarArtists.Add (ConvertSimilarArtistToArtist (similar));
 			}
 
+			AddClickEventsToSimilarList (similarArtists);
+
+			return similarArtists;
+		}
+
+		void AddClickEventsToSimilarList (List<Artist> similarArtists)
+		{
 			ListView listView = FindViewById<ListView> (Resource.Id.similarList);
-			listView.Adapter = new ArtistSceenAdapter(this, similarArtists);
+			listView.Adapter = new ArtistSceenAdapter (this, similarArtists);
 			listView.ItemClick += OnListItemClick;
+		}
 
-			ImageView artistImage = FindViewById<ImageView> (Resource.Id.ivSelectedArtistImage);
-			var artistImages = artist.Image;
-			var artistPhoto =  BitmapLoader.GetImageBitmapFromUrl(artistImages.First (i => i.Size.Equals ("mega")).Value);
-			artistImage.SetImageBitmap(artistPhoto);
+		static Artist ConvertSimilarArtistToArtist (Artist similar)
+		{
+			return new Artist {
+				Name = similar.Name,
+				Image = similar.Image
+			};
+		}
 
-			ScrollView scrollArtist = FindViewById<ScrollView> (Resource.Id.scrollArtistView);
-			scrollArtist.SmoothScrollTo(0, 0);
+		void AddTextViewDataToArtist ()
+		{
+			TextView artistName = FindViewById<TextView> (Resource.Id.twArtistName);
+			artistName.Text = artist.Name;
+
+			TextView artistFormed = FindViewById<TextView> (Resource.Id.formedYearArtist);
+			artistFormed.Text = artist.Bio.YearFormed.ToString ();
+
+			AddArtistBio ();
+
+			AddPublishedYear ();
+		}
+
+		void AddPublishedYear ()
+		{
+			TextView artistPublished = FindViewById<TextView> (Resource.Id.publishedYearArtist);
+			if (artist.Bio.Published != null) 
+			{
+				artistPublished.Text = artist.Bio.Published.ToString ("MMM/yyyy");
+			}
+		}
+
+		void AddArtistBio ()
+		{
+			TextView artistBio = FindViewById<TextView> (Resource.Id.twArtistBio);
+			artistBio.TextFormatted = Html.FromHtml (artist.Bio.Summary);
+			artistBio.MovementMethod = LinkMovementMethod.Instance;
 		}
 
 		public void OnListItemClick(object sender, AdapterView.ItemClickEventArgs e)

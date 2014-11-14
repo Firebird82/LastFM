@@ -16,10 +16,10 @@ namespace LastFM
 	[Activity (Label = "LastFM", MainLauncher = true, Icon = "@drawable/icon")]
 	public class MainActivity : Activity
 	{
-		RestSharp RestSharpFunctions;
-		List<Artist> artistList;
-		List<Album> albumList;
-		List<Track> trackList;
+		RestSharp RestSharpFunctions = new RestSharp ();
+		List<Artist> artistList = new List<Artist> ();
+		List<Album> albumList = new List<Album> ();
+		List<Track> trackList = new List<Track> ();
 
 		protected override void OnCreate (Bundle bundle)
 		{
@@ -27,53 +27,66 @@ namespace LastFM
 
 			// Set our view from the "main" layout resource
 			SetContentView (Resource.Layout.Main);
-			RestSharpFunctions = new RestSharp ();
-			artistList = new List<Artist> ();
-			albumList = new List<Album> ();
-			trackList = new List<Track> ();
 		
-			Button artistSearchButton = FindViewById<Button> (Resource.Id.btnArtistSearch);
-			Button btnGetAlbums = FindViewById<Button> (Resource.Id.btnAlbumResult);
-			Button btnGetArtists = FindViewById<Button> (Resource.Id.btnArtistResult);
-			Button btnGetTracks = FindViewById<Button> (Resource.Id.btnSongResult);
-
 			ListView artistSearchResultListview = FindViewById<ListView> (Resource.Id.lvArtistSearchResult);
 			ListView albumSearchResultListview = FindViewById<ListView> (Resource.Id.lvAlbumSearchResult);
 			ListView trackSearchResultListView = FindViewById<ListView> (Resource.Id.lvTrackSearchResult);
 
 			EditText searchQuery = FindViewById<EditText> (Resource.Id.artistSearchtext);
-			//Button albumSearchButton = FindViewById<Button> (Resource.Id.btnAlbumSearch);
-			//EditText albumSearchQery = FindViewById<EditText> (Resource.Id.albumSearchtext);
 
-			artistSearchButton.Click += delegate 
-			{
-				artistList.Clear();
-				albumList.Clear();
-				HideKeyboard(searchQuery);
-				ArtistSearchResult (searchQuery.Text, artistSearchResultListview);
-			};
-		
-			btnGetAlbums.Click += delegate {
+			ButtonClickEvents (artistSearchResultListview, albumSearchResultListview, trackSearchResultListView, searchQuery);
+		}
+
+		void ButtonClickEvents (ListView artistSearchResultListview, ListView albumSearchResultListview, ListView trackSearchResultListView, EditText searchQuery)
+		{
+			SearchButtonClickEvent (artistSearchResultListview, searchQuery);
+			GetAlbumsClickEvent (artistSearchResultListview, albumSearchResultListview, trackSearchResultListView, searchQuery);
+			GetArtistsClickEvent (artistSearchResultListview, albumSearchResultListview, trackSearchResultListView, searchQuery);
+			GetTracksClickEvent (artistSearchResultListview, albumSearchResultListview, trackSearchResultListView, searchQuery);
+		}
+
+		void GetTracksClickEvent (ListView artistSearchResultListview, ListView albumSearchResultListview, ListView trackSearchResultListView, EditText searchQuery)
+		{
+			Button btnGetTracks = FindViewById<Button> (Resource.Id.btnSongResult);
+			btnGetTracks.Click += delegate {
 				artistSearchResultListview.Adapter = null;
-				trackSearchResultListView.Adapter = null;
-
-				AlbumSearchResult (searchQuery.Text, albumSearchResultListview);
-				HideKeyboard(searchQuery);
+				albumSearchResultListview.Adapter = null;
+				TrackSearchResult (searchQuery.Text, trackSearchResultListView);
+				HideKeyboard (searchQuery);
 			};
+		}
 
+		void GetArtistsClickEvent (ListView artistSearchResultListview, ListView albumSearchResultListview, ListView trackSearchResultListView, EditText searchQuery)
+		{
+			Button btnGetArtists = FindViewById<Button> (Resource.Id.btnArtistResult);
 			btnGetArtists.Click += delegate {
 				albumSearchResultListview.Adapter = null;
 				trackSearchResultListView.Adapter = null;
 				ArtistSearchResult (searchQuery.Text, artistSearchResultListview);
-				HideKeyboard(searchQuery);
+				HideKeyboard (searchQuery);
 			};
+		}
 
-			btnGetTracks.Click += delegate {
+		void GetAlbumsClickEvent (ListView artistSearchResultListview, ListView albumSearchResultListview, ListView trackSearchResultListView, EditText searchQuery)
+		{
+			Button btnGetAlbums = FindViewById<Button> (Resource.Id.btnAlbumResult);
+			btnGetAlbums.Click += delegate {
 				artistSearchResultListview.Adapter = null;
-				albumSearchResultListview.Adapter = null;
+				trackSearchResultListView.Adapter = null;
+				AlbumSearchResult (searchQuery.Text, albumSearchResultListview);
+				HideKeyboard (searchQuery);
+			};
+		}
 
-				TrackSearchResult (searchQuery.Text, trackSearchResultListView);
-				HideKeyboard(searchQuery);
+		void SearchButtonClickEvent (ListView artistSearchResultListview, EditText searchQuery)
+		{
+			Button artistSearchButton = FindViewById<Button> (Resource.Id.btnArtistSearch);
+			artistSearchButton.Click += delegate 
+			{
+				artistList.Clear ();
+				albumList.Clear ();
+				HideKeyboard (searchQuery);
+				ArtistSearchResult (searchQuery.Text, artistSearchResultListview);
 			};
 		}
 
