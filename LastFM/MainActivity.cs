@@ -161,9 +161,9 @@ namespace LastFM
 		public void TrackItemClick (object sender, AdapterView.ItemClickEventArgs e)
 		{
 			var clickedTrack = trackList [e.Position];
-//			var intent = new Intent (this, typeof(TrackViewActivity));
-//			intent.PutExtra ("trackId", clickedTrack.Mbid);
-//			StartActivity (intent);
+			var intent = new Intent (this, typeof(TrackViewActivity));
+			intent.PutExtra ("trackId", clickedTrack.Mbid);
+			StartActivity (intent);
 		}
 
 		public void HideKeyboard(EditText searchQuery)
