@@ -44,7 +44,7 @@ namespace LastFM
 			}
 
 			view.FindViewById<TextView> (Resource.Id.lvTrackName).Text = item.Name;
-			view.FindViewById<TextView> (Resource.Id.lvTrackArtistName).Text = item.Artist;
+			view.FindViewById<TextView> (Resource.Id.lvTrackArtistName).Text = item.Artist.Name;
 			var imageView = view.FindViewById<ImageView> (Resource.Id.ivTrackImage);
 			imageView.SetImageBitmap (coverphoto);
 

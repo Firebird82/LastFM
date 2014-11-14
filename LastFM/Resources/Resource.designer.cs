@@ -63,8 +63,8 @@ namespace LastFM
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f06001d
-			public const int SimilarName = 2131099677;
+			// aapt resource value: 0x7f06001e
+			public const int SimilarName = 2131099678;
 			
 			// aapt resource value: 0x7f060015
 			public const int artistSearchtext = 2131099669;
@@ -96,8 +96,11 @@ namespace LastFM
 			// aapt resource value: 0x7f06000f
 			public const int ivSelectedArtistImage = 2131099663;
 			
-			// aapt resource value: 0x7f06001e
-			public const int ivTrackImage = 2131099678;
+			// aapt resource value: 0x7f060025
+			public const int ivSelectedTrackImage = 2131099685;
+			
+			// aapt resource value: 0x7f06001f
+			public const int ivTrackImage = 2131099679;
 			
 			// aapt resource value: 0x7f06001b
 			public const int lvAlbumSearchResult = 2131099675;
@@ -108,11 +111,14 @@ namespace LastFM
 			// aapt resource value: 0x7f06000c
 			public const int lvListArtistName = 2131099660;
 			
-			// aapt resource value: 0x7f060020
-			public const int lvTrackArtistName = 2131099680;
+			// aapt resource value: 0x7f060021
+			public const int lvTrackArtistName = 2131099681;
 			
-			// aapt resource value: 0x7f06001f
-			public const int lvTrackName = 2131099679;
+			// aapt resource value: 0x7f060020
+			public const int lvTrackName = 2131099680;
+			
+			// aapt resource value: 0x7f06001c
+			public const int lvTrackSearchResult = 2131099676;
 			
 			// aapt resource value: 0x7f060012
 			public const int publishedYearArtist = 2131099666;
@@ -123,11 +129,14 @@ namespace LastFM
 			// aapt resource value: 0x7f06000d
 			public const int scrollArtistView = 2131099661;
 			
+			// aapt resource value: 0x7f060022
+			public const int scrollTrackView = 2131099682;
+			
 			// aapt resource value: 0x7f060013
 			public const int similarHeader = 2131099667;
 			
-			// aapt resource value: 0x7f06001c
-			public const int similarImageList = 2131099676;
+			// aapt resource value: 0x7f06001d
+			public const int similarImageList = 2131099677;
 			
 			// aapt resource value: 0x7f060014
 			public const int similarList = 2131099668;
@@ -149,6 +158,18 @@ namespace LastFM
 			
 			// aapt resource value: 0x7f060006
 			public const int tvSelectedArtistName = 2131099654;
+			
+			// aapt resource value: 0x7f060024
+			public const int tvSelectedTrackArtistName = 2131099684;
+			
+			// aapt resource value: 0x7f060023
+			public const int tvSelectedTrackName = 2131099683;
+			
+			// aapt resource value: 0x7f060027
+			public const int tvTrackBio = 2131099687;
+			
+			// aapt resource value: 0x7f060026
+			public const int tvTrackDuration = 2131099686;
 			
 			// aapt resource value: 0x7f06000a
 			public const int tvTracks = 2131099658;
@@ -198,6 +219,9 @@ namespace LastFM
 			
 			// aapt resource value: 0x7f030007
 			public const int trackListTempelate = 2130903047;
+			
+			// aapt resource value: 0x7f030008
+			public const int TrackView = 2130903048;
 			
 			static Layout()
 			{

@@ -65,6 +65,12 @@ namespace LastFM
 		public string Content { get; set; }
 	}
 
+	public class TrackBio
+	{
+		public string Summary { get; set; }
+		public string Content { get; set; }
+	}
+
 	public class Albummatches{
 		public AlbumCollection albumCollection{ get; set; }
 	}
@@ -72,11 +78,15 @@ namespace LastFM
 	public class Track
 	{
 		public string Name{ get; set; }
-		public string Artist{ get; set; }
+		public Artist Artist{ get; set; }
+		public Album Album { get; set; }
+		public TrackBio Wiki { get; set; }
 		public string Url{ get; set; }
+		public string Id { get; set; }
 		public string Mbid{ get; set; }
 		public double Duration{ get; set; }
 		public TackImageCollection Image{ get; set; }
+
 	}
 
 	public class Trackmatches

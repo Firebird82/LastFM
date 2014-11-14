@@ -9,6 +9,7 @@ using Android.Text;
 using Android;
 using System.Collections.Generic;
 using Android.Views.InputMethods;
+using System.Linq;
 
 namespace LastFM
 {
@@ -38,33 +39,44 @@ namespace LastFM
 
 			ListView artistSearchResultListview = FindViewById<ListView> (Resource.Id.lvArtistSearchResult);
 			ListView albumSearchResultListview = FindViewById<ListView> (Resource.Id.lvAlbumSearchResult);
+			ListView trackSearchResultListView = FindViewById<ListView> (Resource.Id.lvTrackSearchResult);
 
 
 
-			EditText artistSearchQuery = FindViewById<EditText> (Resource.Id.artistSearchtext);
+
+			EditText searchQuery = FindViewById<EditText> (Resource.Id.artistSearchtext);
 			//Button albumSearchButton = FindViewById<Button> (Resource.Id.btnAlbumSearch);
 			//EditText albumSearchQery = FindViewById<EditText> (Resource.Id.albumSearchtext);
 
 			artistSearchButton.Click += delegate 
 			{
-				InputMethodManager imm = (InputMethodManager)GetSystemService(Context.InputMethodService); imm.HideSoftInputFromWindow(artistSearchQuery.WindowToken, 0);
 				artistList.Clear();
 				albumList.Clear();
-				ArtistSearchResult (artistSearchQuery.Text, artistSearchResultListview);
+				HideKeyboard(searchQuery);
+				ArtistSearchResult (searchQuery.Text, artistSearchResultListview);
 			};
 		
 			btnGetAlbums.Click += delegate {
 				artistSearchResultListview.Adapter = null;
-				AlbumSearchResult (artistSearchQuery.Text, albumSearchResultListview);
+				trackSearchResultListView.Adapter = null;
+
+				AlbumSearchResult (searchQuery.Text, albumSearchResultListview);
+				HideKeyboard(searchQuery);
 			};
 
 			btnGetArtists.Click += delegate {
 				albumSearchResultListview.Adapter = null;
-				ArtistSearchResult (artistSearchQuery.Text, artistSearchResultListview);
+				trackSearchResultListView.Adapter = null;
+				ArtistSearchResult (searchQuery.Text, artistSearchResultListview);
+				HideKeyboard(searchQuery);
 			};
 
 			btnGetTracks.Click += delegate {
-				TrackSearchResult (artistSearchQuery.Text, artistSearchResultListview);
+				artistSearchResultListview.Adapter = null;
+				albumSearchResultListview.Adapter = null;
+
+				TrackSearchResult (searchQuery.Text, trackSearchResultListView);
+				HideKeyboard(searchQuery);
 			};
 		}
 
@@ -80,7 +92,7 @@ namespace LastFM
 			var tenArtist = new List<Artist>();
 			if (artistList.Count > 10) 
 			{
-				tenArtist = artistList.GetRange (0,10);
+				tenArtist = artistList.Where (artist => artist.Mbid != "").Take (10).ToList();
 			}	
 
 			searchResultListview.Adapter = new ArtistSceenAdapter (this, tenArtist);
@@ -90,11 +102,10 @@ namespace LastFM
 		public void AlbumSearchResult (string query, ListView searchResultListview)
 		{
 			if (albumList.Count == 0)
-			{	
+			{
 				albumList = RestSharpFunctions.GetAlbumList (query);
 			}
-
-			var tenAlbums = albumList.GetRange (0, 10);
+			var tenAlbums = albumList.Where (album => album.Mbid != "").Take (10).ToList();
 			searchResultListview.Adapter = new AlbumScreenAdapter (this, tenAlbums);
 			searchResultListview.ItemClick += albumItemClick;		
 		}
@@ -106,7 +117,7 @@ namespace LastFM
 				trackList = RestSharpFunctions.GetTrackList (query);
 			}
 
-			var tenTracks = trackList.GetRange (0, 10);
+			var tenTracks = trackList.Where (track => track.Mbid != "\"\"" || track.Image != null).Take (10).ToList();
 			searchResultListview.Adapter = new TrackScreenAdapter (this, tenTracks);
 			searchResultListview.ItemClick += trackItemClick;		
 		}
@@ -134,9 +145,16 @@ namespace LastFM
 		public void trackItemClick (object sender, AdapterView.ItemClickEventArgs e)
 		{
 			var clickedTrack = trackList [e.Position];
-			var intent = new Intent (this, typeof(AlbumViewActivity));
-			intent.PutExtra ("track", clickedTrack.Name);
+			var intent = new Intent (this, typeof(TrackViewActivity));
+			intent.PutExtra ("trackId", clickedTrack.Mbid);
 			StartActivity (intent);
+		}
+
+		public void HideKeyboard(EditText searchQuery){
+		
+		
+			InputMethodManager imm = (InputMethodManager)GetSystemService(Context.InputMethodService); imm.HideSoftInputFromWindow(searchQuery.WindowToken, 0);
+
 		}
 	}
 }

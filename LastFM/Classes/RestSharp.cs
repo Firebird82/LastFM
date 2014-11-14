@@ -44,7 +44,7 @@ namespace LastFM
 			request.AddParameter("api_key", "e527758dd1063dd021d7b8bb180ffd44");
 			request.RequestFormat = DataFormat.Json;
 		
-			if (type == "LastFM.Album" || type == "LastFM.Artist") {
+			if (type == "LastFM.Album" || type == "LastFM.Artist" || type=="LastFM.Track") {
 			
 					request.AddParameter ("mbid", searchString);
 				}
@@ -92,10 +92,10 @@ namespace LastFM
 		}
 
 
-		public Track GetTrack(string query)
+		public Track GetTrack(string queryId)
 		{
 			string method = "track.getinfo";
-			var track = Execute<Track> (query, method);
+			var track = Execute<Track> (queryId, method);
 			return track;
 		}
 
