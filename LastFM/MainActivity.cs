@@ -92,21 +92,27 @@ namespace LastFM
 
 		public void ArtistSearchResult (string query, ListView searchResultListview)
 		{
-			artistList =  RestSharpFunctions.GetArtistList(query);
+			artistList = RestSharpFunctions.GetArtistList(query);
 
+			var tenArtist = ifArtistListIsLowerThan11 (query);
+
+			searchResultListview.Adapter = new ArtistSceenAdapter (this, tenArtist);
+			searchResultListview.ItemClick += ArtistItemClick;
+		}
+
+		List<Artist> ifArtistListIsLowerThan11 (string query)
+		{
 			if (artistList.Count == 0) 
 			{
 				artistList = RestSharpFunctions.GetArtistList (query);
 			}
 
-			var tenArtist = new List<Artist>();
+			var tenArtist = new List<Artist> ();
 			if (artistList.Count > 10) 
 			{
-				tenArtist = artistList.Where (artist => artist.Mbid != "").Take (10).ToList();
-			}	
-
-			searchResultListview.Adapter = new ArtistSceenAdapter (this, tenArtist);
-			searchResultListview.ItemClick += ArtistItemClick;
+				tenArtist = artistList.Where (artist => artist.Mbid != "").Take (10).ToList ();
+			}
+			return tenArtist;
 		}
 			
 		public void AlbumSearchResult (string query, ListView searchResultListview)
