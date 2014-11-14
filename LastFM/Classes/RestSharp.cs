@@ -7,6 +7,7 @@ using RestSharp;
 using System.Drawing;
 using System.Text.RegularExpressions;
 using System.Net;
+using System.Threading.Tasks;
 
 namespace LastFM
 {
@@ -71,7 +72,9 @@ namespace LastFM
 		public Artist GetArtist(string query, string queryId)
 		{
 			string method = "artist.getinfo";
-			var artist = Execute<Artist> (queryId, method);
+			var artist = new Artist ();
+
+			artist = Execute<Artist> (queryId, method);
 
 			if (artist.Similar.Count > 0) 
 			{
@@ -81,10 +84,17 @@ namespace LastFM
 			return artist;
 		}
 
-		public ArtistsCollection GetArtistList(string query)
+		Task<ArtistsCollection> GetArtistListAsync (string query, string method)
+		{
+			return Task.Run (() =>  {
+				return Execute<ArtistsCollection> (query, method);
+			});
+		}
+
+		public async Task<ArtistsCollection> GetArtistList(string query)
 		{
 			string method = "artist.search";
-			return Execute<ArtistsCollection> (query, method);
+			return await GetArtistListAsync (query, method);
 		}
 
 		public Album GetAlbum(string query, string queryId)
@@ -94,10 +104,17 @@ namespace LastFM
 			return album;
 		}
 
-		public AlbumCollection GetAlbumList(string query)
+		public async Task<AlbumCollection> GetAlbumList(string query)
 		{
 			string method = "album.search";
-			return Execute<AlbumCollection> (query, method);
+			return await GetAlbumListAsync (query, method);
+		}
+
+		Task<AlbumCollection> GetAlbumListAsync (string query, string method)
+		{
+			return Task.Run (() =>  {
+				return Execute<AlbumCollection> (query, method);
+			});
 		}
 
 		public Track GetTrack(string queryId)
@@ -107,10 +124,17 @@ namespace LastFM
 			return track;
 		}
 
-		public TrackCollection GetTrackList(string query)
+		public async Task<TrackCollection> GetTrackList(string query)
 		{
 			string method = "track.search";
-			return Execute<TrackCollection> (query, method);
+			return await GetTrackListAsync (query, method);
+		}
+
+		Task<TrackCollection> GetTrackListAsync (string query, string method)
+		{
+			return Task.Run (() =>  {
+				return Execute<TrackCollection> (query, method);
+			});
 		}
 	}
 }

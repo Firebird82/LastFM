@@ -10,6 +10,7 @@ using Android;
 using System.Collections.Generic;
 using Android.Views.InputMethods;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace LastFM
 {
@@ -20,6 +21,7 @@ namespace LastFM
 		List<Artist> artistList = new List<Artist> ();
 		List<Album> albumList = new List<Album> ();
 		List<Track> trackList = new List<Track> ();
+		int searchListSize = 10;
 
 		protected override void OnCreate (Bundle bundle)
 		{
@@ -90,9 +92,11 @@ namespace LastFM
 			};
 		}
 
-		public void ArtistSearchResult (string query, ListView searchResultListview)
+		public async void ArtistSearchResult (string query, ListView searchResultListview)
 		{
-			artistList = RestSharpFunctions.GetArtistList(query);
+			ShowSearhingTextInList (searchResultListview);
+
+			artistList = await RestSharpFunctions.GetArtistList(query);
 
 			var tenArtist = ifArtistListIsLowerThan11 (query);
 
@@ -100,40 +104,63 @@ namespace LastFM
 			searchResultListview.ItemClick += ArtistItemClick;
 		}
 
+		void ShowSearhingTextInList (ListView searchResultListview)
+		{
+			var searchingTextToList = new List<Artist> ();
+			searchingTextToList.Add (new Artist {
+				Name = "SEARCHING!!!"
+			});
+			searchResultListview.Adapter = new ArtistSceenAdapter (this, searchingTextToList);
+		}
+
 		List<Artist> ifArtistListIsLowerThan11 (string query)
 		{
-			if (artistList.Count == 0) 
-			{
-				artistList = RestSharpFunctions.GetArtistList (query);
-			}
-
 			var tenArtist = new List<Artist> ();
-			if (artistList.Count > 10) 
+			if (artistList.Count > searchListSize) 
 			{
-				tenArtist = artistList.Where (artist => artist.Mbid != "").Take (10).ToList ();
+				tenArtist = artistList.Where (artist => artist.Mbid != "").Take (searchListSize).ToList ();
 			}
 			return tenArtist;
 		}
 			
-		public void AlbumSearchResult (string query, ListView searchResultListview)
+		public async void AlbumSearchResult (string query, ListView searchResultListview)
 		{
+			var searchAlbumText = new List<Album> ();
+			searchAlbumText.Add (new Album{Name = "SEARCHING!!!"});
+			searchResultListview.Adapter = new AlbumScreenAdapter (this, searchAlbumText);
+
 			if (albumList.Count == 0)
 			{
-				albumList = RestSharpFunctions.GetAlbumList (query);
+				albumList = await RestSharpFunctions.GetAlbumList (query);
 			}
-			var tenAlbums = albumList.Where (album => album.Mbid != "").Take (10).ToList();
+
+			var tenAlbums = new List<Album> ();
+			if (albumList.Count > searchListSize)
+			{
+				tenAlbums = albumList.Where (album => album.Mbid != "").Take (searchListSize).ToList();
+			}
+
 			searchResultListview.Adapter = new AlbumScreenAdapter (this, tenAlbums);
 			searchResultListview.ItemClick += AlbumItemClick;		
 		}
 
-		public void TrackSearchResult (string query, ListView searchResultListview)
+		public async void TrackSearchResult (string query, ListView searchResultListview)
 		{
+			var searchTracksText = new List<Track> ();
+			searchTracksText.Add (new Track{Name = "SEARCHING!!!"});
+			searchResultListview.Adapter = new TrackScreenAdapter (this, searchTracksText);
+
 			if (trackList.Count == 0)
 			{
-				trackList = RestSharpFunctions.GetTrackList (query);
+				trackList = await RestSharpFunctions.GetTrackList (query);
 			}
 
-			var tenTracks = trackList.Where (track => track.Mbid != "\"\"" || track.Image != null).Take (10).ToList();
+			var tenTracks = new List<Track> ();
+			if (trackList.Count > searchListSize) 
+			{
+				tenTracks = trackList.Where (track => track.Mbid != "\"\"" || track.Image != null).Take (searchListSize).ToList();
+			}
+
 			searchResultListview.Adapter = new TrackScreenAdapter (this, tenTracks);
 			searchResultListview.ItemClick += TrackItemClick;		
 		}
@@ -161,9 +188,9 @@ namespace LastFM
 		public void TrackItemClick (object sender, AdapterView.ItemClickEventArgs e)
 		{
 			var clickedTrack = trackList [e.Position];
-			var intent = new Intent (this, typeof(TrackViewActivity));
-			intent.PutExtra ("trackId", clickedTrack.Mbid);
-			StartActivity (intent);
+//			var intent = new Intent (this, typeof(TrackViewActivity));
+//			intent.PutExtra ("trackId", clickedTrack.Mbid);
+//			StartActivity (intent);
 		}
 
 		public void HideKeyboard(EditText searchQuery)

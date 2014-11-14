@@ -9,6 +9,7 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
+using Android.Graphics;
 
 namespace LastFM
 {
@@ -38,7 +39,11 @@ namespace LastFM
 			var item = items[position];
 
 			var artistImages = item.Image;
-			var coverphoto =  BitmapLoader.GetImageBitmapFromUrl(artistImages.First (i => i.Size.Equals ("small")).Value);
+			Bitmap coverphoto = null; 
+			if (artistImages != null) 
+			{
+				coverphoto =  BitmapLoader.GetImageBitmapFromUrl(artistImages.First (i => i.Size.Equals ("small")).Value);
+			}
 
 			View view = convertView;
 			if (view == null) 
