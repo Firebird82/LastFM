@@ -35,10 +35,15 @@ namespace LastFM
 		{
 			var parameterKey = (methodValue.Split ('.')) [0];
 			var request = new RestRequest("/2.0/", Method.GET);
+			request.AddParameter ("method", methodValue);
+			request.AddParameter(parameterKey, searchString);
+			request.AddParameter ("api_key", "e527758dd1063dd021d7b8bb180ffd44");
 
-			SetupRequest (methodValue, request); 
+			request.RequestFormat = DataFormat.Json;
+
+			//SetupRequest (methodValue, request); 
 		
-			isArtistAlbumTrackOrSearch (searchString, type, parameterKey, request);
+//			isArtistAlbumTrackOrSearch (searchString, type, parameterKey, request);
 
 			return request;
 		}
@@ -63,10 +68,7 @@ namespace LastFM
 
 		static void SetupRequest (string methodValue, RestRequest request)
 		{
-			request.AddParameter ("method", methodValue);
-			request.AddParameter ("api_key", "e527758dd1063dd021d7b8bb180ffd44");
 
-			request.RequestFormat = DataFormat.Json;
 		}
 
 		public Artist GetArtist(string query, string queryId)
@@ -74,7 +76,7 @@ namespace LastFM
 			string method = "artist.getinfo";
 			var artist = new Artist ();
 
-			artist = Execute<Artist> (queryId, method);
+			artist = Execute<Artist> (query, method);
 
 			if (artist.Similar.Count > 0) 
 			{
