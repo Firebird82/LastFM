@@ -54,7 +54,6 @@
     <Compile Include="Classes\RestSharp.cs" />
     <Compile Include="Classes\LastfmClasses.cs" />
     <Compile Include="ArtistViewActivity.cs" />
-    <Compile Include="Classes\GhostObjects.cs" />
     <Compile Include="Classes\ArtistSceenAdapter.cs" />
     <Compile Include="Classes\BitmapLoader.cs" />
     <Compile Include="AlbumViewActivity.cs" />

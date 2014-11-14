@@ -12,52 +12,61 @@ namespace LastFM
 {
 	public class RestSharp
 	{
-		private const string apiKey = "e527758dd1063dd021d7b8bb180ffd44";
-		private const string appsecret = "ec2f518ee3c70baa607756ab81fa066e";
-		private const string address = "http://ws.audioscrobbler.com/2.0/";
-		private const string methodArtistSearch =  "?method=artist.search&artist=";
-		private const string medthodGetArtistInfo =  "?method=artist.getinfo&artist=";
-
 		public RestSharp ()
 		{
-
 		}
 
 		public T Execute<T> (string query,string method) where T : new()
 		{
-			var client = new RestClient();
-			client.BaseUrl = "http://ws.audioscrobbler.com/";
-
 			T argType = new T ();
 			string type = argType.GetType ().ToString ();
 
-			var request = GetRequest (method, query,type);
+			var request = ConfigureRequest (method, query, type);
+
+			var client = new RestClient();
+			client.BaseUrl = "http://ws.audioscrobbler.com/";
+
 			var response = client.Execute<T>(request);
 			return response.Data;
 		}
 
-		RestRequest GetRequest (string methodValue, string searchString,string type)
+		RestRequest ConfigureRequest (string methodValue, string searchString,string type)
 		{
 			var parameterKey = (methodValue.Split ('.')) [0];
 			var request = new RestRequest("/2.0/", Method.GET);
-			request.AddParameter("method", methodValue); // album.search
-			request.AddParameter("api_key", "e527758dd1063dd021d7b8bb180ffd44");
-			request.RequestFormat = DataFormat.Json;
-		
-			if (type == "LastFM.Album" || type == "LastFM.Artist" || type=="LastFM.Track") {
-			
-					request.AddParameter ("mbid", searchString);
-				}
 
-			else {
-					request.AddParameter(parameterKey, searchString); // album, albumName
-			}
+			SetupRequest (methodValue, request); 
+		
+			isArtistAlbumTrackOrSearch (searchString, type, parameterKey, request);
 
 			return request;
 		}
 
+		static void isArtistAlbumTrackOrSearch (string searchString, string type, string parameterKey, RestRequest request)
+		{
+			if (isArtistAlbumOrTrack (type)) 
+			{
+				request.AddParameter ("mbid", searchString);
+			} 
+			else 
+			{
+				//If its a search
+				request.AddParameter (parameterKey, searchString);
+			}
+		}
 
+		static bool isArtistAlbumOrTrack (string type)
+		{
+			return type == "LastFM.Album" || type == "LastFM.Artist" || type == "LastFM.Track";
+		}
 
+		static void SetupRequest (string methodValue, RestRequest request)
+		{
+			request.AddParameter ("method", methodValue);
+			request.AddParameter ("api_key", "e527758dd1063dd021d7b8bb180ffd44");
+
+			request.RequestFormat = DataFormat.Json;
+		}
 
 		public Artist GetArtist(string query, string queryId)
 		{
@@ -90,7 +99,6 @@ namespace LastFM
 			string method = "album.search";
 			return Execute<AlbumCollection> (query, method);
 		}
-
 
 		public Track GetTrack(string queryId)
 		{

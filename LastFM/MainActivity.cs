@@ -41,9 +41,6 @@ namespace LastFM
 			ListView albumSearchResultListview = FindViewById<ListView> (Resource.Id.lvAlbumSearchResult);
 			ListView trackSearchResultListView = FindViewById<ListView> (Resource.Id.lvTrackSearchResult);
 
-
-
-
 			EditText searchQuery = FindViewById<EditText> (Resource.Id.artistSearchtext);
 			//Button albumSearchButton = FindViewById<Button> (Resource.Id.btnAlbumSearch);
 			//EditText albumSearchQery = FindViewById<EditText> (Resource.Id.albumSearchtext);
@@ -96,7 +93,7 @@ namespace LastFM
 			}	
 
 			searchResultListview.Adapter = new ArtistSceenAdapter (this, tenArtist);
-			searchResultListview.ItemClick += artistItemClick;
+			searchResultListview.ItemClick += ArtistItemClick;
 		}
 			
 		public void AlbumSearchResult (string query, ListView searchResultListview)
@@ -107,7 +104,7 @@ namespace LastFM
 			}
 			var tenAlbums = albumList.Where (album => album.Mbid != "").Take (10).ToList();
 			searchResultListview.Adapter = new AlbumScreenAdapter (this, tenAlbums);
-			searchResultListview.ItemClick += albumItemClick;		
+			searchResultListview.ItemClick += AlbumItemClick;		
 		}
 
 		public void TrackSearchResult (string query, ListView searchResultListview)
@@ -119,10 +116,10 @@ namespace LastFM
 
 			var tenTracks = trackList.Where (track => track.Mbid != "\"\"" || track.Image != null).Take (10).ToList();
 			searchResultListview.Adapter = new TrackScreenAdapter (this, tenTracks);
-			searchResultListview.ItemClick += trackItemClick;		
+			searchResultListview.ItemClick += TrackItemClick;		
 		}
 
-		public void artistItemClick (object sender, AdapterView.ItemClickEventArgs e)
+		public void ArtistItemClick (object sender, AdapterView.ItemClickEventArgs e)
 		{
 			var clickedArtist = artistList [e.Position];
 			var intent = new Intent (this, typeof(ArtistViewActivity));
@@ -132,7 +129,7 @@ namespace LastFM
 			StartActivity (intent);
 		}
 
-		public void albumItemClick (object sender, AdapterView.ItemClickEventArgs e)
+		public void AlbumItemClick (object sender, AdapterView.ItemClickEventArgs e)
 		{
 			var clickedAlbum = albumList [e.Position];
 			var intent = new Intent (this, typeof(AlbumViewActivity));
@@ -142,19 +139,17 @@ namespace LastFM
 			StartActivity (intent);
 		}
 
-		public void trackItemClick (object sender, AdapterView.ItemClickEventArgs e)
+		public void TrackItemClick (object sender, AdapterView.ItemClickEventArgs e)
 		{
 			var clickedTrack = trackList [e.Position];
-			var intent = new Intent (this, typeof(TrackViewActivity));
-			intent.PutExtra ("trackId", clickedTrack.Mbid);
-			StartActivity (intent);
+//			var intent = new Intent (this, typeof(TrackViewActivity));
+//			intent.PutExtra ("trackId", clickedTrack.Mbid);
+//			StartActivity (intent);
 		}
 
-		public void HideKeyboard(EditText searchQuery){
-		
-		
+		public void HideKeyboard(EditText searchQuery)
+		{
 			InputMethodManager imm = (InputMethodManager)GetSystemService(Context.InputMethodService); imm.HideSoftInputFromWindow(searchQuery.WindowToken, 0);
-
 		}
 	}
 }

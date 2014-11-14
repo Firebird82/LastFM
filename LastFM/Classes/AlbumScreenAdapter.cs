@@ -16,36 +16,38 @@ namespace LastFM
 		List<Album> items;
 		Activity context;
 
-		public AlbumScreenAdapter(Activity context, List<Album> items):base(){
-
+		public AlbumScreenAdapter(Activity context, List<Album> items):base()
+		{
 			this.context = context;
 			this.items = items;
 		}
 
-		public override Album this [int position] {
+		public override Album this [int position] 
+		{
 			get{ return items [position]; }
 		}
 
 		public override long GetItemId(int position)
 		{
-			return position;		}
+			return position;		
+		}
 
 		public override View GetView(int position, View convertView, ViewGroup parent)
 		{
 			var item = items[position];
-			View view = convertView;
-			var artistImages = item.Image;
 
+			var artistImages = item.Image;
 			var coverphoto =  BitmapLoader.GetImageBitmapFromUrl(artistImages.First (i => i.Size.Equals ("small")).Value);
 
-			if (view == null) {
+			View view = convertView;
+
+			if (view == null) 
+			{
 				view = context.LayoutInflater.Inflate (Resource.Layout.albumListTemplate, null);
 			}
-
 			view.FindViewById<TextView> (Resource.Id.tvAlbumName).Text = item.Name;
-
 			var imageView = view.FindViewById<ImageView> (Resource.Id.ivAlbumImage);
-				imageView.SetImageBitmap (coverphoto);
+			imageView.SetImageBitmap (coverphoto);
 
 			return view;
 		}

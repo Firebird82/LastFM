@@ -36,17 +36,16 @@ namespace LastFM
 		public override View GetView(int position, View convertView, ViewGroup parent)
 		{
 			var item = items[position];
-			View view = convertView;
+
 			var artistImages = item.Image;
 			var coverphoto =  BitmapLoader.GetImageBitmapFromUrl(artistImages.First (i => i.Size.Equals ("small")).Value);
 
+			View view = convertView;
 			if (view == null) 
 			{
 				view = context.LayoutInflater.Inflate (Resource.Layout.artistListTemplate, null);
 			}
-
 			view.FindViewById<TextView> (Resource.Id.lvListArtistName).Text = item.Name;
-
 			var imageView = view.FindViewById<ImageView> (Resource.Id.ivArtistImage);
 			imageView.SetImageBitmap(coverphoto);
 

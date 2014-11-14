@@ -19,11 +19,6 @@ namespace LastFM
 
 	public class ArtistImageCollection : List<Image> { }
 	public class ArtistSimilarCollection : List<Artist> { }
-	public class ArtistsCollection : List<Artist> { }
-	public class AlbumImageCollection : List<Image>{}
-	public class AlbumCollection : List<Album>{}
-	public class TrackCollection : List<Track>{}
-	public class TackImageCollection: List<Image>{}
 
 	public class Artist
 	{
@@ -41,10 +36,14 @@ namespace LastFM
 		public string Url { get; set; }
 	}
 
+	public class ArtistsCollection : List<Artist> { }
+
 	public class Artistmatches
 	{
 		public ArtistsCollection artistsCollection { get; set; }
 	}
+
+	public class AlbumImageCollection : List<Image>{}
 
 	public class Album
 	{
@@ -71,9 +70,14 @@ namespace LastFM
 		public string Content { get; set; }
 	}
 
-	public class Albummatches{
+	public class AlbumCollection : List<Album>{}
+
+	public class Albummatches
+	{
 		public AlbumCollection albumCollection{ get; set; }
 	}
+
+	public class TackImageCollection: List<Image>{}
 
 	public class Track
 	{
@@ -86,8 +90,9 @@ namespace LastFM
 		public string Mbid{ get; set; }
 		public double Duration{ get; set; }
 		public TackImageCollection Image{ get; set; }
-
 	}
+
+	public class TrackCollection : List<Track>{}
 
 	public class Trackmatches
 	{

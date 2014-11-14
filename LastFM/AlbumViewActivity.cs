@@ -59,9 +59,8 @@ namespace LastFM
 			realesedate.Text += checkedAlbum.Releasedate;
 
 			int count = 0;
-
-			foreach (var track in album.Tracks) {
-			
+			foreach (var track in album.Tracks) 
+			{
 				TimeSpan ts = TimeSpan.FromSeconds(track.Duration);
 				var duration = String.Format("{0}:{1:D2}", ts.Minutes, ts.Seconds);
 
@@ -76,24 +75,23 @@ namespace LastFM
 
 		public Album CheckIfAlbumPopertyIsNull(Album album){
 		
-			if (album.Wiki == null) {
+			if (album.Wiki == null)
+			{
 				album.Wiki = new Albumbio ();
 				album.Wiki.Summary = "Biography not available";
-				}
+			}
 
-			if (string.IsNullOrEmpty(album.Releasedate)) {
+			if (string.IsNullOrEmpty(album.Releasedate))
+			{
 				album.Releasedate = "N/A";			
 			} 
-			else{
-
-
+			else
+			{
 				string realeaseDate = album.Releasedate.Remove (album.Releasedate.Length -7);
 				realeaseDate = realeaseDate.Remove (0, 3);
-				album.Releasedate = realeaseDate;			
-		
+				album.Releasedate = realeaseDate;
 			}
 			return album;
-
 		}
 	}
 }

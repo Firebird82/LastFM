@@ -14,40 +14,43 @@ namespace LastFM
 		{
 		}
 
-		public static async Task<Bitmap> GetImageFromUrl(string url)
-		{
-			using (var client = new HttpClient())
-			{
-				var msg = await client.GetAsync(url);
-				if (!msg.IsSuccessStatusCode) return null;
-				using (var stream = await msg.Content.ReadAsStreamAsync())
-				{
-					var bitmap = await BitmapFactory.DecodeStreamAsync(stream);
-					return bitmap;
-				}
-			}
-		}
-
 		public static Bitmap GetImageBitmapFromUrl(string url)
 		{
 			Bitmap imageBitmap = null;
 
+			imageBitmap = DownloadImage (url, imageBitmap);
+
+			return imageBitmap;
+		}
+
+		static Bitmap DownloadImage(string url, Bitmap imageBitmap)
+		{
 			using (var webClient = new WebClient())
-			{ 
-
-				if (url != "") {
-					var imageBytes = webClient.DownloadData(url);
-				
-					if (imageBytes != null && imageBytes.Length > 0)
-					{
-						imageBitmap = BitmapFactory.DecodeByteArray(imageBytes, 0, imageBytes.Length);
-					}
-
+			{
+				if (url != "")
+				{
+					imageBitmap = DownloadImageData (url, webClient);
 				}
 			}
 			return imageBitmap;
 		}
 
+		static Bitmap DownloadImageData (string url, WebClient webClient)
+		{
+			Bitmap imageBitmap = null;
+			var imageBytes = webClient.DownloadData (url);
+			if (isNotNullorZero (imageBytes)) 
+			{
+				imageBitmap = BitmapFactory.DecodeByteArray (imageBytes, 0, imageBytes.Length);
+				return imageBitmap;
+			}
+			return imageBitmap;
+		}
+
+		static bool isNotNullorZero (byte[] imageBytes)
+		{
+			return imageBytes != null && imageBytes.Length > 0;
+		}
 	}
 }
 

@@ -32,12 +32,6 @@
                 android:id="@+id/tvSelectedArtistName"
                 android:paddingTop="0dp"
                 android:paddingBottom="5dp" />
-        <!--            <GridLayout
-                android:layout_width="match_parent"
-                android:layout_height="20dp"
-                android:rowCount="1"
-                android:columnCount="2"
-                android:layout_gravity="center">-->
             <ImageView
                 android:src="@android:drawable/ic_menu_gallery"
                 android:layout_width="match_parent"
@@ -47,7 +41,6 @@
                 android:padding="5dp"
                 android:layout_gravity="center"
                 android:id="@+id/ivSelectedAlbumImage" />
-        <!--	        </GridLayout>-->
             <TextView
                 android:text="Realease date:"
                 android:gravity="center"
