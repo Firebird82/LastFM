@@ -36,7 +36,31 @@ namespace LastFM
 
 			artist = RestSharpFunctions.GetArtist (query,queryId);
 
-			AddDataToArtistView ();
+			PopulateArtistView ();
+		}
+
+		void PopulateArtistView ()
+		{
+			if (artist.Name == null) 
+			{
+				ArtistNotFound ();
+			}
+			else 
+			{
+				AddDataToArtistView ();
+			}
+		}
+
+		void ArtistNotFound ()
+		{
+			TextView artistName = FindViewById<TextView> (Resource.Id.twArtistName);
+			artistName.Text = "Artist Not Found!!!";
+			TextView artistFormed = FindViewById<TextView> (Resource.Id.formedYearArtist);
+			artistFormed.Text = "";
+			TextView publishedYear = FindViewById<TextView> (Resource.Id.publishedYearArtist);
+			publishedYear.Text = "";
+			TextView artistBio = FindViewById<TextView> (Resource.Id.twArtistBio);
+			artistBio.Text = "";
 		}
 
 		void AddDataToArtistView ()

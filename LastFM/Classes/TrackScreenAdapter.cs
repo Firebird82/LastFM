@@ -64,7 +64,8 @@ namespace LastFM
 		{
 			var artistImages = item.Image;
 			Bitmap coverphoto = null;
-			if (artistImages != null) {
+			if (artistImages != null) 
+			{
 				coverphoto = BitmapLoader.GetImageBitmapFromUrl (artistImages.First (i => i.Size.Equals ("small")).Value);
 			}
 			return coverphoto;
