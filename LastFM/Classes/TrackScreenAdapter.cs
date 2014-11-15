@@ -53,7 +53,7 @@ namespace LastFM
 			}
 			view.FindViewById<TextView> (Resource.Id.lvTrackName).Text = item.Name;
 			if (item.Artist != null) {
-				view.FindViewById<TextView> (Resource.Id.lvTrackArtistName).Text = item.Artist.Name;
+				view.FindViewById<TextView> (Resource.Id.lvTrackArtistName).Text = item.Artist;
 			}
 			var imageView = view.FindViewById<ImageView> (Resource.Id.ivTrackImage);
 			imageView.SetImageBitmap (coverphoto);

@@ -87,6 +87,7 @@ namespace LastFM
 			{
 				artistList.Clear ();
 				albumList.Clear ();
+				trackList.Clear();
 				HideKeyboard (searchQuery);
 				ArtistSearchResult (searchQuery.Text, artistSearchResultListview);
 			};
@@ -98,9 +99,9 @@ namespace LastFM
 
 			artistList = await RestSharpFunctions.GetArtistList(query);
 
-			var tenArtist = ifArtistListIsLowerThan11 (query);
+			artistList = ifArtistListIsLowerThan11 (query);
 
-			searchResultListview.Adapter = new ArtistSceenAdapter (this, tenArtist);
+			searchResultListview.Adapter = new ArtistSceenAdapter (this, artistList);
 			searchResultListview.ItemClick += ArtistItemClick;
 		}
 
@@ -113,12 +114,11 @@ namespace LastFM
 
 		List<Artist> ifArtistListIsLowerThan11 (string query)
 		{
-			var tenArtist = new List<Artist> ();
 			if (artistList.Count > searchListSize) 
 			{
-				tenArtist = artistList.Where (artist => artist.Mbid != "").Take (searchListSize).ToList ();
+				artistList = artistList.Where (artist => artist.Mbid != "").Take (searchListSize).ToList ();
 			}
-			return tenArtist;
+			return artistList;
 		}
 			
 		public async void AlbumSearchResult (string query, ListView searchResultListview)
@@ -132,13 +132,12 @@ namespace LastFM
 				albumList = await RestSharpFunctions.GetAlbumList (query);
 			}
 
-			var tenAlbums = new List<Album> ();
 			if (albumList.Count > searchListSize)
 			{
-				tenAlbums = albumList.Where (album => album.Mbid != "").Take (searchListSize).ToList();
+				albumList = albumList.Where (album => album.Mbid != "").Take (searchListSize).ToList();
 			}
 
-			searchResultListview.Adapter = new AlbumScreenAdapter (this, tenAlbums);
+			searchResultListview.Adapter = new AlbumScreenAdapter (this, albumList);
 			searchResultListview.ItemClick += AlbumItemClick;		
 		}
 
@@ -153,13 +152,14 @@ namespace LastFM
 				trackList = await RestSharpFunctions.GetTrackList (query);
 			}
 
-			var tenTracks = new List<Track> ();
 			if (trackList.Count > searchListSize) 
 			{
-				tenTracks = trackList.Where (track => track.Mbid != "\"\"" || track.Image != null).Take (searchListSize).ToList();
+				trackList = (from t in trackList
+				             where t.Mbid.Length > 5  
+				             select t).Take (10).ToList ();
 			}
 
-			searchResultListview.Adapter = new TrackScreenAdapter (this, tenTracks);
+			searchResultListview.Adapter = new TrackScreenAdapter (this, trackList);
 			searchResultListview.ItemClick += TrackItemClick;		
 		}
 
@@ -186,9 +186,10 @@ namespace LastFM
 		public void TrackItemClick (object sender, AdapterView.ItemClickEventArgs e)
 		{
 			var clickedTrack = trackList [e.Position];
-//			var intent = new Intent (this, typeof(TrackViewActivity));
-//			intent.PutExtra ("trackId", clickedTrack.Mbid);
-//			StartActivity (intent);
+			var intent = new Intent (this, typeof(TrackViewActivity));
+			intent.PutExtra ("trackId", clickedTrack.Mbid);
+			intent.PutExtra ("artistName", clickedTrack.Artist);
+			StartActivity (intent);
 		}
 
 		public void HideKeyboard(EditText searchQuery)

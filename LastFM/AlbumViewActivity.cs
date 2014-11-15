@@ -11,6 +11,7 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Android.Graphics;
+using Android.Text;
 
 namespace LastFM
 {
@@ -60,7 +61,7 @@ namespace LastFM
 			artistName.Text = checkedAlbum.Artist;
 
 			TextView albumbio = FindViewById<TextView> (Resource.Id.tvalbumBio);
-			albumbio.Text = checkedAlbum.Wiki.Summary;
+			albumbio.TextFormatted = Html.FromHtml( checkedAlbum.Wiki.Summary);
 
 			TextView realesedate = FindViewById<TextView> (Resource.Id.tvRealeseDate);
 			realesedate.Text += checkedAlbum.Releasedate;

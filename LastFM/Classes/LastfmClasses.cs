@@ -82,7 +82,7 @@ namespace LastFM
 	public class Track
 	{
 		public string Name{ get; set; }
-		public Artist Artist{ get; set; }
+		public string Artist{ get; set; }
 		public Album Album { get; set; }
 		public TrackBio Wiki { get; set; }
 		public string Url{ get; set; }

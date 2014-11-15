@@ -10,6 +10,7 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
+using Android.Text;
 
 namespace LastFM
 {
@@ -31,6 +32,8 @@ namespace LastFM
 		public void GetTrack()
 		{
 			string queryId = Intent.GetStringExtra ("trackId") ?? "Data not available";
+			string sArtistName = Intent.GetStringExtra ("artistName") ?? "Data not available";
+
 
 			TextView trackName = FindViewById<TextView> (Resource.Id.tvSelectedTrackName);
 			TextView artistName = FindViewById<TextView> (Resource.Id.tvSelectedTrackArtistName);
@@ -52,19 +55,15 @@ namespace LastFM
 			scrollTrack.SmoothScrollTo(0, 0);
 
 			trackName.Text = checkTrack.Name;
-			artistName.Text = checkTrack.Artist.Name;
-			trackBio.Text = checkTrack.Wiki.Summary;
+			artistName.Text = sArtistName;
+			trackBio.TextFormatted = Html.FromHtml(checkTrack.Wiki.Summary);
 			albumImage.SetImageBitmap(coverphoto);
+
 			duration.Text += String.Format("{0}:{1:D2}", ts.Minutes, ts.Seconds);
 
 
 	
 
-		
-
-
-
-		
 
 			//tracks.Adapter = new AlbumTrackScreenAdapter (this, album.Tracks);
 		}
