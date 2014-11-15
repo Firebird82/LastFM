@@ -101,12 +101,44 @@ namespace LastFM
 
 			artistList = ifArtistListIsLowerThan11 (query);
 
+
+			if (artistList.Count == 0) 
+			{
+				ArtistShowNoSearchResult (searchResultListview);
+			} 
+			else 
+			{
+				ArtistShowSucessfullResult (query, searchResultListview);
+			}
+		}
+
+		void ArtistShowSucessfullResult (string query, ListView searchResultListview)
+		{
+			artistList = ifArtistListIsLowerThan11 (query);
 			searchResultListview.Adapter = new ArtistSceenAdapter (this, artistList);
 			searchResultListview.ItemClick += ArtistItemClick;
 		}
 
+		void ArtistShowNoSearchResult (ListView searchResultListview)
+		{
+			ClearLists ();
+			var noResultTextToList = new List<Artist> ();
+			noResultTextToList.Add (new Artist {
+				Name = "No results found!!!"
+			});
+			searchResultListview.Adapter = new ArtistSceenAdapter (this, noResultTextToList);
+		}
+
+		private void ClearLists()
+		{
+			artistList.Clear() ;
+			albumList.Clear();
+			trackList.Clear();
+		}
+
 		void ShowSearhingTextInList (ListView searchResultListview)
 		{
+			ClearLists ();
 			var searchingTextToList = new List<Artist> ();
 			searchingTextToList.Add (new Artist {Name = "SEARCHING!!!"});
 			searchResultListview.Adapter = new ArtistSceenAdapter (this, searchingTextToList);
@@ -121,46 +153,113 @@ namespace LastFM
 			return artistList;
 		}
 			
-		public async void AlbumSearchResult (string query, ListView searchResultListview)
+		public void AlbumSearchResult (string query, ListView searchResultListview)
 		{
-			var searchAlbumText = new List<Album> ();
-			searchAlbumText.Add (new Album{Name = "SEARCHING!!!"});
-			searchResultListview.Adapter = new AlbumScreenAdapter (this, searchAlbumText);
+			AlbumSearching (searchResultListview);
 
-			if (albumList.Count == 0)
-			{
-				albumList = await RestSharpFunctions.GetAlbumList (query);
-			}
-
-			if (albumList.Count > searchListSize)
-			{
-				albumList = albumList.Where (album => album.Mbid != "").Take (searchListSize).ToList();
-			}
-
-			searchResultListview.Adapter = new AlbumScreenAdapter (this, albumList);
-			searchResultListview.ItemClick += AlbumItemClick;		
+			ShowAlbumSearchResult (query, searchResultListview);
 		}
 
-		public async void TrackSearchResult (string query, ListView searchResultListview)
+		async void ShowAlbumSearchResult (string query, ListView searchResultListview)
 		{
-			var searchTracksText = new List<Track> ();
-			searchTracksText.Add (new Track{Name = "SEARCHING!!!"});
-			searchResultListview.Adapter = new TrackScreenAdapter (this, searchTracksText);
+			if (albumList.Count == 0) {
+				albumList = await RestSharpFunctions.GetAlbumList (query);
+				if (albumList.Count == 0) {
+					AlbumShowNoSearchResult (searchResultListview);
+				}
+				else {
+					AlbumShowSearchResult (searchResultListview);
+				}
+			}
+			else {
+				AlbumShowSearchResult (searchResultListview);
+			}
+		}
 
-			if (trackList.Count == 0)
-			{
+
+		void AlbumShowSearchResult (ListView searchResultListview)
+		{
+			if (albumList.Count > searchListSize) {
+				albumList = albumList.Where (album => album.Mbid != "").Take (searchListSize).ToList ();
+			}
+			searchResultListview.Adapter = new AlbumScreenAdapter (this, albumList);
+			searchResultListview.ItemClick += AlbumItemClick;
+		}
+
+		void AlbumShowNoSearchResult (ListView searchResultListview)
+		{
+			ClearLists ();
+			var noResultTextToList = new List<Album> ();
+			noResultTextToList.Add (new Album {
+				Name = "No results found!!!"
+			});
+			searchResultListview.Adapter = new AlbumScreenAdapter (this, noResultTextToList);
+		}
+
+		void AlbumSearching (ListView searchResultListview)
+		{
+			ClearLists ();
+			var searchAlbumText = new List<Album> ();
+			searchAlbumText.Add (new Album {
+				Name = "SEARCHING!!!"
+			});
+			searchResultListview.Adapter = new AlbumScreenAdapter (this, searchAlbumText);
+		}
+
+		public void TrackSearchResult (string query, ListView searchResultListview)
+		{
+			TrackSearching (searchResultListview);
+
+			ShowTrackSearchResult (query, searchResultListview);
+		}
+
+		async void ShowTrackSearchResult (string query, ListView searchResultListview)
+		{
+			if (trackList.Count == 0) {
 				trackList = await RestSharpFunctions.GetTrackList (query);
+				if (trackList.Count == 0) {
+					TrackShowNoSearchResult (searchResultListview);
+				}
+				else {
+					TrackListShowResult (searchResultListview);
+				}
 			}
+			else {
+				TrackListShowResult (searchResultListview);
+			}
+		}
 
-			if (trackList.Count > searchListSize) 
-			{
+
+		void TrackListShowResult (ListView searchResultListview)
+		{
+			if (trackList.Count > searchListSize) {
 				trackList = (from t in trackList
-				             where t.Mbid.Length > 5  
-				             select t).Take (10).ToList ();
+				             where t.Mbid.Length > 5 && t.Image != null
+				             select t).Take (searchListSize).ToList ();
 			}
-
 			searchResultListview.Adapter = new TrackScreenAdapter (this, trackList);
-			searchResultListview.ItemClick += TrackItemClick;		
+			searchResultListview.ItemClick += TrackItemClick;
+		}
+
+		void TrackSearching (ListView searchResultListview)
+		{
+			ClearLists ();
+			var searchTracksText = new List<Track> ();
+			searchTracksText.Add (new Track {
+				Name = "SEARCHING!!!"
+			});
+			searchResultListview.Adapter = new TrackScreenAdapter (this, searchTracksText);
+		}
+
+		void TrackShowNoSearchResult (ListView searchResultListview)
+		{
+			ClearLists ();
+			var noResultTextToList = new List<Track> ();
+			noResultTextToList.Add (new Track {
+				Name = "No results found!!!"
+			});
+
+			searchResultListview.Adapter = new TrackScreenAdapter (this, noResultTextToList);
 		}
 
 		public void ArtistItemClick (object sender, AdapterView.ItemClickEventArgs e)

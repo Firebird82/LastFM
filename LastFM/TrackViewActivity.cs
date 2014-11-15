@@ -46,6 +46,7 @@ namespace LastFM
 			//ListView tracks = FindViewById<ListView> (Resource.Id.lvTracks);
 
 			var track = RestSharpFunctions.GetTrack (queryId);
+			var f = queryId.Length;
 			var checkTrack = CheckIfTrackPopertyIsNull (track);
 			var trackImage = checkTrack.Album.Image;
 			var coverphoto =  BitmapLoader.GetImageBitmapFromUrl(trackImage.First (i => i.Size.Equals ("extralarge")).Value);
