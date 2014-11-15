@@ -38,29 +38,36 @@ namespace LastFM
 		{
 			var item = items[position];
 
-			var artistImages = item.Image;
-			Bitmap coverphoto = null;
-			if (artistImages != null) 
-			{
-				coverphoto =  BitmapLoader.GetImageBitmapFromUrl(artistImages.First (i => i.Size.Equals ("small")).Value);
-			}
+			var coverphoto = SetCoverPhoto (item);
 
+			var view = SetView (convertView, item, coverphoto);
+
+			return view;
+		}
+
+		View SetView (View convertView, Track item, Bitmap coverphoto)
+		{
 			View view = convertView;
-
 			if (view == null) {
 				view = context.LayoutInflater.Inflate (Resource.Layout.trackListTempelate, null);
 			}
-
 			view.FindViewById<TextView> (Resource.Id.lvTrackName).Text = item.Name;
-
 			if (item.Artist != null) {
 				view.FindViewById<TextView> (Resource.Id.lvTrackArtistName).Text = item.Artist.Name;
 			}
-
 			var imageView = view.FindViewById<ImageView> (Resource.Id.ivTrackImage);
 			imageView.SetImageBitmap (coverphoto);
-
 			return view;
+		}
+
+		static Bitmap SetCoverPhoto (Track item)
+		{
+			var artistImages = item.Image;
+			Bitmap coverphoto = null;
+			if (artistImages != null) {
+				coverphoto = BitmapLoader.GetImageBitmapFromUrl (artistImages.First (i => i.Size.Equals ("small")).Value);
+			}
+			return coverphoto;
 		}
 
 		public override int Count
