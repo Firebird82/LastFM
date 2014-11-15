@@ -92,9 +92,12 @@ namespace LastFM
 			TextView tvTracks = FindViewById<TextView> (Resource.Id.tvTracks);
 			int count = 0;
 
-			foreach (var track in album.Tracks) 
+			if (album.Tracks != null) 
 			{
-				AddTrackData (track, count, tvTracks);
+				foreach (var track in album.Tracks) 
+				{
+					AddTrackData (track, count, tvTracks);
+				}
 			}
 		}
 
