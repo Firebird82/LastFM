@@ -59,7 +59,6 @@
     <Compile Include="AlbumViewActivity.cs" />
     <Compile Include="Classes\AlbumScreenAdapter.cs" />
     <Compile Include="Classes\TrackScreenAdapter.cs" />
-    <Compile Include="Classes\AlbumTrackScreenAdapter.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />

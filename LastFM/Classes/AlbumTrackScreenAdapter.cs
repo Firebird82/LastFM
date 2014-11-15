@@ -12,12 +12,12 @@ using Android.Widget;
 
 namespace LastFM
 {
-	public class AlbumTrackScreenAdapter:BaseAdapter<Track>
+	public class AlbumTrackScreenAdapter2:BaseAdapter<Track>
 	{
 		List<Track> items;
 		Activity context;
 
-		public AlbumTrackScreenAdapter(Activity context, List<Track> items):base()
+		public AlbumTrackScreenAdapter2(Activity context, List<Track> items):base()
 		{
 			this.context = context;
 			this.items = items;
