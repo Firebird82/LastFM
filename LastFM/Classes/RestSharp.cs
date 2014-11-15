@@ -38,12 +38,12 @@ namespace LastFM
 
 			SetupRequest (methodValue, request); 
 		
-			isArtistAlbumTrackOrSearch (searchString, type, parameterKey, request);
+			isAlbumTrackOrSearch (searchString, type, parameterKey, request);
 
 			return request;
 		}
 
-		static void isArtistAlbumTrackOrSearch (string searchString, string type, string parameterKey, RestRequest request)
+		static void isAlbumTrackOrSearch (string searchString, string type, string parameterKey, RestRequest request)
 		{
 			if (isArtistAlbumOrTrack (type)) 
 			{
@@ -58,7 +58,7 @@ namespace LastFM
 
 		static bool isArtistAlbumOrTrack (string type)
 		{
-			return type == "LastFM.Album" || type == "LastFM.Artist" || type == "LastFM.Track";
+			return type == "LastFM.Album" || type == "LastFM.Track";
 		}
 
 		static void SetupRequest (string methodValue, RestRequest request)
@@ -74,12 +74,15 @@ namespace LastFM
 			string method = "artist.getinfo";
 			var artist = new Artist ();
 
-			artist = Execute<Artist> (queryId, method);
+			artist = Execute<Artist> (query, method);
 
-			if (artist.Similar.Count > 0) 
-			{
-				artist.Similar.RemoveAt(0);
+			if (artist.Similar != null) {
+				if (artist.Similar.Count > 0) 
+				{
+					artist.Similar.RemoveAt(0);
+				}
 			}
+
 
 			return artist;
 		}

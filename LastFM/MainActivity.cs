@@ -107,9 +107,7 @@ namespace LastFM
 		void ShowSearhingTextInList (ListView searchResultListview)
 		{
 			var searchingTextToList = new List<Artist> ();
-			searchingTextToList.Add (new Artist {
-				Name = "SEARCHING!!!"
-			});
+			searchingTextToList.Add (new Artist {Name = "SEARCHING!!!"});
 			searchResultListview.Adapter = new ArtistSceenAdapter (this, searchingTextToList);
 		}
 
