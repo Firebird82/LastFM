@@ -34,7 +34,7 @@ namespace LastFM
 			string query = Intent.GetStringExtra ("artist") ?? "Data not available";
 			string queryId = Intent.GetStringExtra ("artistId") ?? "Data not available";
 
-			artist = RestSharpFunctions.GetArtist (query,queryId);
+			artist = RestSharpFunctions.GetArtist (query, queryId);
 
 			PopulateArtistView ();
 		}
@@ -55,10 +55,13 @@ namespace LastFM
 		{
 			TextView artistName = FindViewById<TextView> (Resource.Id.twArtistName);
 			artistName.Text = "Artist Not Found!!!";
+
 			TextView artistFormed = FindViewById<TextView> (Resource.Id.formedYearArtist);
 			artistFormed.Text = "";
+
 			TextView publishedYear = FindViewById<TextView> (Resource.Id.publishedYearArtist);
 			publishedYear.Text = "";
+
 			TextView artistBio = FindViewById<TextView> (Resource.Id.twArtistBio);
 			artistBio.Text = "";
 		}

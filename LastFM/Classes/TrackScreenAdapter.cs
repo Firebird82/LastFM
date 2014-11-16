@@ -51,10 +51,12 @@ namespace LastFM
 			if (view == null) {
 				view = context.LayoutInflater.Inflate (Resource.Layout.trackListTempelate, null);
 			}
+
 			view.FindViewById<TextView> (Resource.Id.lvTrackName).Text = item.Name;
 			if (item.Artist != null) {
 				view.FindViewById<TextView> (Resource.Id.lvTrackArtistName).Text = item.Artist;
 			}
+
 			var imageView = view.FindViewById<ImageView> (Resource.Id.ivTrackImage);
 			imageView.SetImageBitmap (coverphoto);
 			return view;
@@ -64,6 +66,7 @@ namespace LastFM
 		{
 			var artistImages = item.Image;
 			Bitmap coverphoto = null;
+
 			if (artistImages != null) 
 			{
 				coverphoto = BitmapLoader.GetImageBitmapFromUrl (artistImages.First (i => i.Size.Equals ("small")).Value);

@@ -101,7 +101,6 @@ namespace LastFM
 
 			artistList = ifArtistListIsLowerThan11 (query);
 
-
 			if (artistList.Count == 0) 
 			{
 				ArtistShowNoSearchResult (searchResultListview);
@@ -131,7 +130,7 @@ namespace LastFM
 
 		private void ClearLists()
 		{
-			artistList.Clear() ;
+			artistList.Clear();
 			albumList.Clear();
 			trackList.Clear();
 		}

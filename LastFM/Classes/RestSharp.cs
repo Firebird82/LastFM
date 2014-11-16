@@ -82,8 +82,6 @@ namespace LastFM
 					artist.Similar.RemoveAt(0);
 				}
 			}
-
-
 			return artist;
 		}
 
